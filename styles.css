@@ -1,13 +1,20 @@
-/* GENERAL */
-body {
-    font-family: 'Fredoka One', cursive;
+/* ---------------- GENERAL ---------------- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box; /* evita overflow por padding/margin */
+}
+
+html, body {
     margin: 0;
     padding: 0;
+    overflow-x: hidden; /* evita scroll horizontal en móviles */
+    font-family: 'Fredoka One', cursive;
     background-color: #f9f9f9;
     color: #333;
 }
 
-/* HEADER */
+/* ---------------- HEADER ---------------- */
 header {
     background: linear-gradient(90deg, #00FFFF 0%, #FF00FF 50%, #FFFF00 100%);
     color: #333;
@@ -20,10 +27,12 @@ header {
     display: flex;
     flex-direction: row;
     justify-content: center; /* bloque centrado horizontalmente */
-    align-items: center; /* vertical center */
-    gap: 3rem; 
+    align-items: center; /* centra verticalmente */
+    gap: 3rem;
     width: 100%;
     max-width: 1200px;
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
 .header-top {
@@ -74,12 +83,13 @@ header {
     background-color: #00FFFF;
 }
 
-/* PRODUCTOS GRID */
+/* ---------------- PRODUCTOS GRID ---------------- */
 .productos-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
-    padding: 2rem;
+    padding: 2rem 1rem;
+    width: 100%;
 }
 
 @media (min-width: 500px) {
@@ -104,6 +114,7 @@ header {
     max-width: 100%;
     height: auto;
     object-fit: cover;
+    display: block;
     border-radius: 4px;
 }
 
@@ -142,7 +153,7 @@ button:hover {
     color: #FF00FF;
 }
 
-/* MODAL CARRITO */
+/* ---------------- MODAL CARRITO ---------------- */
 .modal {
     display: none;
     position: fixed;
@@ -154,7 +165,6 @@ button:hover {
     overflow-y: auto;
     background-color: rgba(0,0,0,0.6);
     padding: 1rem;
-    box-sizing: border-box;
 }
 
 .modal-content {
@@ -165,7 +175,6 @@ button:hover {
     max-width: 400px;
     border-radius: 8px;
     border: 2px solid #00FFFF;
-    box-sizing: border-box;
 }
 
 .close {
@@ -221,13 +230,14 @@ button:hover {
     text-align: center;
 }
 
-/* FORMULARIO CONTACTO */
+/* ---------------- FORMULARIO CONTACTO ---------------- */
 form {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
     max-width: 400px;
     margin: auto;
+    padding: 0 1rem;
 }
 
 form input, form textarea, form button {
@@ -242,7 +252,7 @@ form button {
     font-weight: bold;
 }
 
-/* FOOTER */
+/* ---------------- FOOTER ---------------- */
 footer {
     text-align: center;
     padding: 1rem;
@@ -250,7 +260,7 @@ footer {
     color: #333;
 }
 
-/* --- RESPONSIVE --- */
+/* ---------------- RESPONSIVE MÓVIL ---------------- */
 @media (max-width: 768px) {
     .header-container {
         flex-direction: column;
