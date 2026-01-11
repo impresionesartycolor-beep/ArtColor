@@ -68,7 +68,7 @@ nav a:hover {
 }
 
 /* ============================
-   Productos
+   Productos verticales
 ============================ */
 .productos-grid {
     display: grid;
@@ -157,10 +157,12 @@ button:hover {
 
 .modal-content {
     background-color: #fff;
-    padding: 2rem;
+    padding: 1.5rem;
     border-radius: 12px;
     width: 100%;
     max-width: 450px;
+    max-height: 90vh; /* Máximo 90% altura de pantalla */
+    overflow-y: auto;
     box-shadow: 0 10px 25px rgba(0,0,0,0.3);
     position: relative;
     display: flex;
@@ -199,6 +201,7 @@ button:hover {
     border-bottom: 1px solid #eee;
     font-weight: bold;
     color: #333;
+    word-break: break-word; /* evita que el texto se salga */
 }
 
 #cliente-nombre,
@@ -208,6 +211,7 @@ button:hover {
     border: 1px solid #ccc;
     width: 100%;
     font-size: 14px;
+    box-sizing: border-box;
 }
 
 #comprar {
@@ -277,9 +281,11 @@ footer {
 
     .productos-grid { grid-template-columns: 1fr; padding: 1rem; }
 
-    .producto img {
-        height: auto;
-    }
+    .producto img { height: auto; }
+
+    .modal-content { width: 95%; max-height: 95vh; padding: 1rem; }
+
+    #carrito-lista { max-height: 200px; }
 
     #cliente-nombre,
     #cliente-nota,
