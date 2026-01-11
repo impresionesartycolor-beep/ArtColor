@@ -8,7 +8,7 @@
 html, body {
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
+    overflow-x: hidden; /* evita scroll horizontal en móviles */
     font-family: 'Fredoka One', cursive;
     background-color: #f9f9f9;
     color: #333;
@@ -83,14 +83,22 @@ header {
 
 /* ---------------- PRODUCTOS ---------------- */
 #productos h2 {
-    text-align: center;
-    font-size: 32px;
+    text-align: center; /* centra horizontalmente */
+    font-size: 32px;    /* más grande */
     font-weight: bold;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.5rem; /* espacio debajo */
+    letter-spacing: 1px; /* espacio entre letras */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2); /* sombra suave */
+
+    /* efecto degradado tipo pop-art */
     background: linear-gradient(90deg, #00FFFF, #FF00FF, #FFFF00);
+
+    /* versión estándar para compatibilidad */
+    background-clip: text;
+
+    /* versión webkit para Chrome/Safari */
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
 }
 
 .productos-grid {
