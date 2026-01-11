@@ -1,6 +1,8 @@
-/* ==============================
-   GENERAL
-============================== */
+/* ============================
+   Fuentes y body
+============================ */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
 body {
     font-family: 'Fredoka One', cursive;
     margin: 0;
@@ -10,9 +12,9 @@ body {
     font-size: 16px;
 }
 
-/* ==============================
-   HEADER
-============================== */
+/* ============================
+   Header
+============================ */
 header {
     background: linear-gradient(90deg, #00FFFF 0%, #FF00FF 50%, #FFFF00 100%);
     color: #333;
@@ -20,7 +22,6 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap;
 }
 
 .logo {
@@ -39,7 +40,6 @@ h1 {
 nav {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
 }
 
 nav a {
@@ -47,7 +47,6 @@ nav a {
     margin: 0 1rem;
     text-decoration: none;
     font-weight: bold;
-    transition: color 0.3s;
 }
 
 nav a:hover {
@@ -62,16 +61,15 @@ nav a:hover {
     cursor: pointer;
     border-radius: 4px;
     font-weight: bold;
-    transition: all 0.3s ease;
 }
 
 #carrito-btn:hover {
     background-color: #00FFFF;
 }
 
-/* ==============================
-   PRODUCTOS
-============================== */
+/* ============================
+   Productos verticales
+============================ */
 .productos-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -85,6 +83,12 @@ nav a:hover {
     }
 }
 
+@media (min-width: 1200px) {
+    .productos-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
 .producto {
     background: white;
     padding: 1rem;
@@ -92,43 +96,50 @@ nav a:hover {
     text-align: center;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     border: 2px solid #FFFF00;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .producto img {
     max-width: 100%;
-    height: 150px;
+    height: auto;
     object-fit: cover;
     border-radius: 4px;
+    margin-bottom: 0.5rem;
 }
 
 .producto h3 {
     color: #00FFFF;
+    margin: 0.5rem 0 0.25rem 0;
 }
 
 .producto p {
     color: #FF00FF;
+    margin: 0 0 0.5rem 0;
 }
 
-button.agregar-carrito {
+button {
+    font-family: 'Fredoka One', cursive;
+    font-size: 14px;
     background-color: #00FFFF;
     color: #333;
     border: none;
-    padding: 0.5rem;
+    padding: 0.5rem 1rem;
     cursor: pointer;
     border-radius: 4px;
     font-weight: bold;
     transition: all 0.3s ease;
-    margin-top: 5px;
 }
 
-button.agregar-carrito:hover {
+button:hover {
     background-color: #FF00FF;
     transform: scale(1.05);
 }
 
-/* ==============================
-   MODAL / CARRITO
-============================== */
+/* ============================
+   Modal carrito
+============================ */
 .modal {
     display: none;
     position: fixed;
@@ -137,95 +148,113 @@ button.agregar-carrito:hover {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0,0,0,0.6);
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 1rem;
-    box-sizing: border-box;
 }
 
 .modal-content {
     background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 12px;
     width: 100%;
     max-width: 450px;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    max-height: 90vh; /* Máximo 90% altura de pantalla */
+    overflow-y: auto;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
     position: relative;
     display: flex;
     flex-direction: column;
-    box-sizing: border-box;
-}
-
-.modal h2 {
-    margin-top: 0;
-    color: #00FFFF;
-    text-align: center;
-}
-
-#carrito-lista {
-    list-style: none;
-    padding: 0;
-    margin: 1rem 0;
-    max-height: 300px;
-    overflow-y: auto;
-}
-
-#carrito-lista li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.5rem;
-    border-bottom: 1px solid #eee;
-    font-size: 14px;
-    color: #333;
-}
-
-#total {
-    font-weight: bold;
-    color: #FF00FF;
-    display: block;
-    text-align: right;
-    margin-top: 1rem;
-}
-
-#whatsapp {
-    background-color: #25D366;
-    color: white;
-    border: none;
-    padding: 0.7rem;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 16px;
-    margin-top: 10px;
-    transition: all 0.3s ease;
-}
-
-#whatsapp:hover {
-    background-color: #1ebe5d;
-    transform: scale(1.03);
+    gap: 1rem;
 }
 
 .close {
     position: absolute;
     top: 10px;
     right: 15px;
-    font-size: 26px;
+    font-size: 28px;
     font-weight: bold;
-    color: #aaa;
+    color: #333;
     cursor: pointer;
-    transition: color 0.2s;
 }
 
 .close:hover {
     color: #FF00FF;
 }
 
-/* ==============================
-   FOOTER
-============================== */
+#carrito-lista {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 250px;
+    overflow-y: auto;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+#carrito-lista li {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #eee;
+    font-weight: bold;
+    color: #333;
+    word-break: break-word; /* evita que el texto se salga */
+}
+
+#cliente-nombre,
+#cliente-nota {
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    width: 100%;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+#comprar {
+    background-color: #00FFFF;
+    color: #333;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#comprar:hover {
+    background-color: #FF00FF;
+    color: #fff;
+    transform: scale(1.05);
+}
+
+#total {
+    font-weight: bold;
+    color: #FF00FF;
+    font-size: 18px;
+    text-align: right;
+}
+
+/* Scrollbar lista productos */
+#carrito-lista::-webkit-scrollbar {
+    width: 6px;
+}
+
+#carrito-lista::-webkit-scrollbar-thumb {
+    background-color: #FF00FF;
+    border-radius: 3px;
+}
+
+#carrito-lista::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* ============================
+   Footer
+============================ */
 footer {
     text-align: center;
     padding: 1rem;
@@ -233,48 +262,34 @@ footer {
     color: #333;
 }
 
-/* ==============================
-   RESPONSIVE
-============================== */
+/* ============================
+   Responsive
+============================ */
 @media (max-width: 600px) {
-    body {
-        font-size: 14px;
-    }
+    body { font-size: 14px; }
 
-    h1 {
-        font-size: 1.5rem;
-    }
+    h1 { font-size: 1.5rem; }
 
     header {
         flex-direction: column;
         text-align: center;
     }
 
-    .logo {
-        height: 40px;
-        margin: 0 0 0.5rem 0;
-    }
+    .logo { height: 40px; margin-bottom: 0.5rem; }
 
-    nav {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
+    nav { flex-direction: column; gap: 0.5rem; }
 
-    .productos-grid {
-        grid-template-columns: 1fr;
-        padding: 1rem;
-    }
+    .productos-grid { grid-template-columns: 1fr; padding: 1rem; }
 
-    #carrito-lista li {
-        flex-direction: column;
-        align-items: flex-start;
-    }
+    .producto img { height: auto; }
 
-    #total {
-        text-align: left;
-    }
+    .modal-content { width: 95%; max-height: 95vh; padding: 1rem; }
 
-    #whatsapp {
-        width: 100%;
+    #carrito-lista { max-height: 200px; }
+
+    #cliente-nombre,
+    #cliente-nota,
+    #comprar {
+        font-size: 14px;
     }
 }
