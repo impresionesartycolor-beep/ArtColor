@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const totalSpan = document.getElementById('total');
     const comprarBtn = document.getElementById('comprar');
 
-    const WHATSAPP_NUMBER = "54911XXXXXXXX"; // ← poné tu número
+    const WHATSAPP_NUMBER = "+54398022"; // ← poné tu número
 
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
