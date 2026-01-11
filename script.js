@@ -8,33 +8,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
-    // Actualiza carrito en UI
+    // Actualizar carrito en UI
     function actualizarCarrito() {
         carritoLista.innerHTML = '';
         let total = 0;
-        carrito.forEach((item, index) => {
+
+        carrito.forEach(item => {
             const li = document.createElement('li');
-            li.textContent = `${item.nombre} x${item.cantidad} - $${(item.precio * item.cantidad).toFixed(2)}`;
+            li.textContent = `${item.nombre} x${item.cantidad} - $${item.precio * item.cantidad}`;
             carritoLista.appendChild(li);
             total += item.precio * item.cantidad;
         });
+
         totalSpan.textContent = total.toFixed(2);
-        carritoBtn.textContent = `Carrito (${carrito.reduce((sum, item) => sum + item.cantidad, 0)})`;
+        carritoBtn.textContent = `Carrito (${carrito.length})`;
         localStorage.setItem('carrito', JSON.stringify(carrito));
     }
 
-    // Agregar producto al carrito
-    document.querySelectorAll('.agregar-carrito').forEach(btn => {
+    // Agregar productos al carrito
+    document.querySelectorAll('.agregar-carrito').forEach((btn, index) => {
         btn.addEventListener('click', (e) => {
             const producto = e.target.closest('.producto');
             const id = producto.dataset.id;
             const nombre = producto.dataset.nombre;
             const precio = parseFloat(producto.dataset.precio);
 
-            // Verificar si ya existe en el carrito
-            const existing = carrito.find(item => item.id === id);
-            if (existing) {
-                existing.cantidad += 1;
+            // Si ya existe el producto en carrito, aumentamos cantidad
+            const itemExistente = carrito.find(item => item.id === id);
+            if (itemExistente) {
+                itemExistente.cantidad += 1;
             } else {
                 carrito.push({ id, nombre, precio, cantidad: 1 });
             }
@@ -43,46 +45,36 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Mostrar modal
+    // Abrir modal
     carritoBtn.addEventListener('click', () => {
         modal.style.display = 'block';
         actualizarCarrito();
     });
 
-    // Cerrar modal
+    // Cerrar modal con X
     closeBtn.addEventListener('click', () => {
         modal.style.display = 'none';
     });
 
-    // Cerrar modal al hacer click fuera del contenido
+    // Cerrar modal al hacer click afuera
     window.addEventListener('click', (e) => {
-        if (e.target === modal) modal.style.display = 'none';
+        if (e.target === modal) {
+            modal.style.display = 'none';
+        }
     });
 
     // Finalizar por WhatsApp
     whatsappBtn.addEventListener('click', () => {
-        if (carrito.length === 0) {
-            alert("El carrito está vacío.");
-            return;
-        }
-
-        const numero = "+543364398022"; // tu número
-        let mensaje = "¡Hola! Quiero realizar la siguiente compra:%0A";
+        let mensaje = "Hola! Quiero comprar:\n";
         carrito.forEach(item => {
-            mensaje += `- ${item.nombre} x${item.cantidad} - $${(item.precio * item.cantidad).toFixed(2)}%0A`;
+            mensaje += `- ${item.nombre} x${item.cantidad}\n`;
         });
-        const total = carrito.reduce((sum, item) => sum + item.precio * item.cantidad, 0);
-        mensaje += `Total: $${total.toFixed(2)}`;
-
-        const url = `https://api.whatsapp.com/send?phone=${numero}&text=${mensaje}`;
-        window.open(url, '_blank');
-
-        // Vaciar carrito después de enviar
-        carrito = [];
-        actualizarCarrito();
-        modal.style.display = 'none';
+        mensaje += `Total: $${totalSpan.textContent}`;
+        const numero = "+543364398022";
+        const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+        window.open(url, "_blank");
     });
 
-    // Inicializar carrito al cargar la página
+    // Inicializar carrito
     actualizarCarrito();
 });
