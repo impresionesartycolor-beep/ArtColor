@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
         carrito.forEach(item => {
             const li = document.createElement('li');
             li.innerHTML = `
-                ${item.nombre} - $${item.precio * item.cantidad}
+                <strong>${item.nombre}</strong> - $${(item.precio * item.cantidad).toFixed(2)}
                 <div class="cantidad-controls">
                     <button class="menos">-</button>
                     <span>${item.cantidad}</span>
@@ -33,8 +33,10 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             li.querySelector('.menos').addEventListener('click', () => {
-                if (item.cantidad > 1) item.cantidad -= 1;
-                actualizarCarrito();
+                if (item.cantidad > 1) {
+                    item.cantidad -= 1;
+                    actualizarCarrito();
+                }
             });
 
             li.querySelector('.eliminar').addEventListener('click', () => {
@@ -87,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Abrir modal
+    // Abrir modal solo cuando se hace clic
     carritoBtn.addEventListener('click', () => {
         modal.style.display = 'block';
         actualizarCarrito();
@@ -104,6 +106,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // WhatsApp
     whatsappBtn.addEventListener('click', () => {
+        if (carrito.length === 0) return alert("Tu carrito está vacío!");
+
         let mensaje = "Hola! Quiero comprar:\n";
         carrito.forEach(item => {
             mensaje += `- ${item.nombre} x${item.cantidad}\n`;
@@ -114,5 +118,6 @@ document.addEventListener('DOMContentLoaded', () => {
         window.open(url, "_blank");
     });
 
+    // Inicializar contador de carrito sin abrir modal
     actualizarCarrito();
 });

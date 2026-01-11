@@ -13,6 +13,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap; /* Para que se adapte en móviles */
 }
 
 .logo {
@@ -22,21 +23,25 @@ header {
 }
 
 h1 {
-    flex: 1;
+    flex: 1 1 100%;
     text-align: center;
-    margin: 0;
+    margin: 0.5rem 0;
 }
 
 nav {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
 }
 
 nav a {
     color: #333;
-    margin: 0 1rem;
+    margin: 0 0.5rem;
     text-decoration: none;
     font-weight: bold;
+    font-size: 14px;
 }
 
 nav a:hover {
@@ -47,10 +52,11 @@ nav a:hover {
     background-color: #FFFF00;
     color: #333;
     border: none;
-    padding: 0.5rem;
+    padding: 0.5rem 0.8rem;
     cursor: pointer;
     border-radius: 4px;
     font-weight: bold;
+    font-size: 14px;
 }
 
 #carrito-btn:hover {
@@ -64,9 +70,15 @@ nav a:hover {
     padding: 2rem;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 500px) {
     .productos-grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 900px) {
+    .productos-grid {
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 
@@ -77,22 +89,24 @@ nav a:hover {
     text-align: center;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     border: 2px solid #FFFF00;
-    position: relative; /* para notificación flotante */
+    position: relative;
 }
 
 .producto img {
     max-width: 100%;
-    height: 150px;
+    height: auto; /* Ajuste para mobile */
     object-fit: cover;
     border-radius: 4px;
 }
 
 .producto h3 {
     color: #00FFFF;
+    font-size: 16px;
 }
 
 .producto p {
     color: #FF00FF;
+    font-size: 14px;
 }
 
 button {
@@ -101,7 +115,7 @@ button {
     background-color: #00FFFF;
     color: #333;
     border: none;
-    padding: 0.5rem;
+    padding: 0.4rem 0.6rem;
     cursor: pointer;
     border-radius: 4px;
     font-weight: bold;
@@ -128,17 +142,21 @@ button:hover {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.4);
+    overflow-y: auto; /* Para scroll en móviles */
+    background-color: rgba(0,0,0,0.6);
+    padding: 1rem;
+    box-sizing: border-box;
 }
 
 .modal-content {
     background-color: white;
-    margin: 10% auto;
+    margin: 5% auto;
     padding: 20px;
-    width: 90%;
-    max-width: 500px;
+    width: 100%;
+    max-width: 400px; /* más pequeño para móviles */
     border-radius: 8px;
     border: 2px solid #00FFFF;
+    box-sizing: border-box;
 }
 
 .close {
@@ -181,4 +199,67 @@ footer {
     0% { opacity: 0; transform: translate(-50%, -50px); }
     50% { opacity: 1; transform: translate(-50%, -30px); }
     100% { opacity: 0; transform: translate(-50%, -60px); }
+}
+
+/* Controles de cantidad dentro del modal */
+.cantidad-controls {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 5px;
+}
+
+.cantidad-controls button {
+    padding: 0.2rem 0.5rem;
+    font-size: 14px;
+}
+
+.cantidad-controls span {
+    min-width: 20px;
+    text-align: center;
+}
+
+/* Formulario contacto responsive */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-width: 400px;
+    margin: auto;
+}
+
+form input, form textarea, form button {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 14px;
+}
+
+form button {
+    background-color: #00FFFF;
+    color: #333;
+    font-weight: bold;
+}
+
+@media (max-width: 400px) {
+    h1 {
+        font-size: 20px;
+    }
+
+    .producto h3 {
+        font-size: 14px;
+    }
+
+    .producto p {
+        font-size: 12px;
+    }
+
+    button {
+        font-size: 12px;
+        padding: 0.3rem 0.5rem;
+    }
+
+    .cantidad-controls button {
+        padding: 0.2rem 0.4rem;
+        font-size: 12px;
+    }
 }
