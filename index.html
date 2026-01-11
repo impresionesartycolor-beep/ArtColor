@@ -4,78 +4,93 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ArtColor - Tienda de Arte Personalizado</title>
+
+    <!-- FUENTE -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>ArtColor</h1>
-        <nav>
-            <a href="#productos">Productos</a>
-            <a href="#contacto">Contacto</a>
-            <button id="carrito-btn">Carrito (0)</button>
-        </nav>
-    </header>
 
-    <section id="productos">
-        <h2>Nuestros Productos</h2>
-        <div class="productos-grid">
-            <div class="producto" data-id="1" data-nombre="Sticker Personalizado" data-precio="5">
-                <img src="images/sticker.jpg" alt="Sticker">
-                <h3>Sticker Personalizado</h3>
-                <p>$5.00</p>
-                <button class="agregar-carrito">Agregar al Carrito</button>
-            </div>
-            <div class="producto" data-id="2" data-nombre="Foto Impresa" data-precio="10">
-                <img src="images/foto.jpg" alt="Foto">
-                <h3>Foto Impresa</h3>
-                <p>$10.00</p>
-                <button class="agregar-carrito">Agregar al Carrito</button>
-            </div>
-            <div class="producto" data-id="3" data-nombre="Tatuaje Temporal" data-precio="8">
-                <img src="images/tatuaje.jpg" alt="Tatuaje">
-                <h3>Tatuaje Temporal</h3>
-                <p>$8.00</p>
-                <button class="agregar-carrito">Agregar al Carrito</button>
-            </div>
-            <div class="producto" data-id="4" data-nombre="Pin para Crocs" data-precio="6">
-                <img src="images/pin.jpg" alt="Pin">
-                <h3>Pin para Crocs</h3>
-                <p>$6.00</p>
-                <button class="agregar-carrito">Agregar al Carrito</button>
-            </div>
-            <div class="producto" data-id="5" data-nombre="Fotocopia Personalizada" data-precio="3">
-                <img src="images/fotocopia.jpg" alt="Fotocopia">
-                <h3>Fotocopia Personalizada</h3>
-                <p>$3.00</p>
-                <button class="agregar-carrito">Agregar al Carrito</button>
-            </div>
+<header>
+    <img src="images/LogoArtColor.png" class="logo" alt="ArtColor">
+    <h1>ArtColor</h1>
+    <nav>
+        <a href="#productos">Productos</a>
+        <a href="#contacto">Contacto</a>
+        <button id="carrito-btn">Carrito (0)</button>
+    </nav>
+</header>
+
+<section id="productos">
+    <h2>Nuestros Productos</h2>
+
+    <div class="productos-grid">
+
+        <!-- PRODUCTO 1 -->
+        <div class="producto"
+             data-id="1"
+             data-nombre="Sticker Personalizado"
+             data-precio="500">
+
+            <img src="images/sticker.jpg" alt="Sticker Personalizado">
+            <h3>Sticker Personalizado</h3>
+            <p>$500</p>
+
+            <input type="file" class="archivo" accept="image/*" required>
+            <button class="agregar-carrito">Agregar</button>
         </div>
-    </section>
 
-    <section id="carrito-modal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Carrito de Compras</h2>
-            <ul id="carrito-lista"></ul>
-            <p>Total: $<span id="total">0</span></p>
-            <button id="comprar">Comprar</button>
+        <!-- PRODUCTO 2 -->
+        <div class="producto"
+             data-id="2"
+             data-nombre="Foto Impresa"
+             data-precio="1000">
+
+            <img src="images/Polaroid1.jpeg" alt="Foto Impresa">
+            <h3>Foto Impresa</h3>
+            <p>$1.000</p>
+
+            <input type="file" class="archivo" accept="image/*" required>
+            <button class="agregar-carrito">Agregar</button>
         </div>
-    </section>
 
-    <section id="contacto">
-        <h2>Contacto</h2>
-        <form>
-            <input type="text" placeholder="Nombre" required>
-            <input type="email" placeholder="Email" required>
-            <textarea placeholder="Mensaje"></textarea>
-            <button type="submit">Enviar</button>
-        </form>
-    </section>
+        <!-- PRODUCTO 3 -->
+        <div class="producto"
+             data-id="3"
+             data-nombre="Tatuaje Temporal"
+             data-precio="800">
 
-    <footer>
-        <p>&copy; 2023 ArtColor. Todos los derechos reservados.</p>
-    </footer>
+            <img src="images/tatuaje.jpg" alt="Tatuaje Temporal">
+            <h3>Tatuaje Temporal</h3>
+            <p>$800</p>
 
-    <script src="script.js"></script>
+            <input type="file" class="archivo" accept="image/*" required>
+            <button class="agregar-carrito">Agregar</button>
+        </div>
+
+    </div>
+</section>
+
+<!-- MODAL CARRITO -->
+<section id="carrito-modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Tu carrito</h2>
+        <ul id="carrito-lista"></ul>
+        <p>Total: $<span id="total">0</span></p>
+        <button id="whatsapp">Finalizar por WhatsApp</button>
+    </div>
+</section>
+
+<footer id="contacto">
+    <p>&copy; 2026 ArtColor</p>
+</footer>
+
+<!-- JS -->
+<script src="script.js"></script>
 </body>
 </html>
