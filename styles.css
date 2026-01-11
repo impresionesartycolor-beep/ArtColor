@@ -82,6 +82,16 @@ header {
     background-color: #00FFFF;
 }
 
+/* ---------------- IMÁGENES EN EL CARRITO ---------------- */
+#carrito-lista li img {
+    width: 40px;   /* tamaño pequeño */
+    height: 40px;
+    object-fit: contain;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+
 /* ---------------- PRODUCTOS ---------------- */
 #productos h2 {
     text-align: center; /* centra horizontalmente */
