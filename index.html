@@ -14,13 +14,17 @@
 <body>
 
 <header>
-    <img src="images/LogoArtColor.png" alt="ArtColor Logo" class="logo">
-    <h1>ArtColor</h1>
-    <nav>
-        <a href="#productos">Productos</a>
-        <a href="#contacto">Contacto</a>
-        <button id="carrito-btn">Carrito (0)</button>
-    </nav>
+    <div class="header-container">
+        <div class="header-top">
+            <img src="images/LogoArtColor.png" alt="ArtColor Logo" class="logo">
+            <h1>ArtColor</h1>
+        </div>
+        <nav class="header-nav">
+            <a href="#productos">Productos</a>
+            <a href="#contacto">Contacto</a>
+            <button id="carrito-btn">Carrito (0)</button>
+        </nav>
+    </div>
 </header>
 
 <section id="productos">
@@ -28,7 +32,7 @@
     <div class="productos-grid">
 
         <div class="producto" data-id="1" data-nombre="Sticker Personalizado" data-precio="500">
-            <img src="images/Stickers.png" alt="Sticker">
+            <img src="images/Stickers.jpeg" alt="Sticker">
             <h3>Sticker Personalizado</h3>
             <p>$500</p>
             <button class="agregar-carrito">Agregar</button>
@@ -44,7 +48,7 @@
         </div>
 
         <div class="producto" data-id="3" data-nombre="Tatuaje Temporal" data-precio="800">
-            <img src="images/TatuajesTemporales.jpg" alt="Tatuaje Temporal">
+            <img src="images/TatuajesTemporales.jpeg" alt="Tatuaje Temporal">
             <h3>Tatuaje Temporal</h3>
             <p>$800</p>
             <button class="agregar-carrito">Agregar</button>

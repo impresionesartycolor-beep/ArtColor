@@ -1,3 +1,4 @@
+/* GENERAL */
 body {
     font-family: 'Fredoka One', cursive;
     margin: 0;
@@ -6,45 +7,55 @@ body {
     color: #333;
 }
 
+/* HEADER */
 header {
     background: linear-gradient(90deg, #00FFFF 0%, #FF00FF 50%, #FFFF00 100%);
     color: #333;
-    padding: 1rem;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: center; /* centra horizontal en PC */
+}
+
+.header-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center; /* bloque centrado horizontalmente */
+    align-items: center; /* vertical center */
+    gap: 3rem; 
+    width: 100%;
+    max-width: 1200px;
+}
+
+.header-top {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap; /* Para que se adapte en móviles */
+    gap: 1rem;
 }
 
 .logo {
     height: 50px;
     width: auto;
-    margin-right: 1rem;
 }
 
-h1 {
-    flex: 1 1 100%;
-    text-align: center;
-    margin: 0.5rem 0;
+.header-top h1 {
+    margin: 0;
+    font-size: 24px;
 }
 
-nav {
+.header-nav {
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.5rem;
+    gap: 1rem;
 }
 
-nav a {
+.header-nav a {
     color: #333;
-    margin: 0 0.5rem;
     text-decoration: none;
     font-weight: bold;
     font-size: 14px;
 }
 
-nav a:hover {
+.header-nav a:hover {
     color: #FF00FF;
 }
 
@@ -63,6 +74,7 @@ nav a:hover {
     background-color: #00FFFF;
 }
 
+/* PRODUCTOS GRID */
 .productos-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -71,15 +83,11 @@ nav a:hover {
 }
 
 @media (min-width: 500px) {
-    .productos-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+    .productos-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (min-width: 900px) {
-    .productos-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
+    .productos-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
 .producto {
@@ -94,7 +102,7 @@ nav a:hover {
 
 .producto img {
     max-width: 100%;
-    height: auto; /* Ajuste para mobile */
+    height: auto;
     object-fit: cover;
     border-radius: 4px;
 }
@@ -115,7 +123,7 @@ button {
     background-color: #00FFFF;
     color: #333;
     border: none;
-    padding: 0.4rem 0.6rem;
+    padding: 0.5rem;
     cursor: pointer;
     border-radius: 4px;
     font-weight: bold;
@@ -134,6 +142,7 @@ button:hover {
     color: #FF00FF;
 }
 
+/* MODAL CARRITO */
 .modal {
     display: none;
     position: fixed;
@@ -142,7 +151,7 @@ button:hover {
     top: 0;
     width: 100%;
     height: 100%;
-    overflow-y: auto; /* Para scroll en móviles */
+    overflow-y: auto;
     background-color: rgba(0,0,0,0.6);
     padding: 1rem;
     box-sizing: border-box;
@@ -153,7 +162,7 @@ button:hover {
     margin: 5% auto;
     padding: 20px;
     width: 100%;
-    max-width: 400px; /* más pequeño para móviles */
+    max-width: 400px;
     border-radius: 8px;
     border: 2px solid #00FFFF;
     box-sizing: border-box;
@@ -169,13 +178,6 @@ button:hover {
 
 .close:hover {
     color: #FF00FF;
-}
-
-footer {
-    text-align: center;
-    padding: 1rem;
-    background: linear-gradient(90deg, #FFFF00 0%, #FF00FF 50%, #00FFFF 100%);
-    color: #333;
 }
 
 /* NOTIFICACIÓN SOBRE PRODUCTO */
@@ -201,7 +203,7 @@ footer {
     100% { opacity: 0; transform: translate(-50%, -60px); }
 }
 
-/* Controles de cantidad dentro del modal */
+/* CONTROLES CANTIDAD EN MODAL */
 .cantidad-controls {
     display: flex;
     align-items: center;
@@ -219,7 +221,7 @@ footer {
     text-align: center;
 }
 
-/* Formulario contacto responsive */
+/* FORMULARIO CONTACTO */
 form {
     display: flex;
     flex-direction: column;
@@ -240,26 +242,41 @@ form button {
     font-weight: bold;
 }
 
-@media (max-width: 400px) {
-    h1 {
-        font-size: 20px;
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 1rem;
+    background: linear-gradient(90deg, #FFFF00 0%, #FF00FF 50%, #00FFFF 100%);
+    color: #333;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        text-align: center;
     }
 
-    .producto h3 {
-        font-size: 14px;
+    .header-top {
+        flex-direction: column;
+        align-items: center;
     }
 
-    .producto p {
-        font-size: 12px;
+    .logo { height: 40px; }
+
+    .header-top h1 { font-size: 20px; }
+
+    .header-nav {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        width: 100%;
     }
 
-    button {
-        font-size: 12px;
-        padding: 0.3rem 0.5rem;
-    }
-
-    .cantidad-controls button {
-        padding: 0.2rem 0.4rem;
-        font-size: 12px;
-    }
+    .producto h3 { font-size: 14px; }
+    .producto p { font-size: 12px; }
+    button { font-size: 12px; padding: 0.3rem 0.5rem; }
+    .cantidad-controls button { padding: 0.2rem 0.4rem; font-size: 12px; }
 }

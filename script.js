@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
-    // Actualizar carrito y cantidades
     function actualizarCarrito() {
         carritoLista.innerHTML = '';
         let total = 0;
@@ -33,10 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             li.querySelector('.menos').addEventListener('click', () => {
-                if (item.cantidad > 1) {
-                    item.cantidad -= 1;
-                    actualizarCarrito();
-                }
+                if (item.cantidad > 1) item.cantidad -= 1;
+                actualizarCarrito();
             });
 
             li.querySelector('.eliminar').addEventListener('click', () => {
@@ -46,9 +43,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         totalSpan.textContent = total.toFixed(2);
-        carritoBtn.textContent = `Carrito (${carrito.reduce((acc, i) => acc + i.cantidad, 0)})`;
+        carritoBtn.textContent = `Carrito (${carrito.reduce((acc,i)=>acc+i.cantidad,0)})`;
 
-        // Actualiza contador visual de cada producto
         document.querySelectorAll('.producto').forEach(prod => {
             const id = prod.dataset.id;
             const item = carrito.find(i => i.id === id);
@@ -58,18 +54,14 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('carrito', JSON.stringify(carrito));
     }
 
-    // Mostrar notificación sobre el producto
     function mostrarNotificacionSobreProducto(producto, mensaje) {
         const notif = document.createElement('div');
         notif.classList.add('flotante-notificacion');
         notif.textContent = mensaje;
         producto.appendChild(notif);
-        setTimeout(() => {
-            notif.remove();
-        }, 1000); // dura 1 segundo
+        setTimeout(() => notif.remove(), 1000);
     }
 
-    // Agregar productos al carrito
     document.querySelectorAll('.agregar-carrito').forEach(btn => {
         btn.addEventListener('click', (e) => {
             const producto = e.target.closest('.producto');
@@ -77,47 +69,33 @@ document.addEventListener('DOMContentLoaded', () => {
             const nombre = producto.dataset.nombre;
             const precio = parseFloat(producto.dataset.precio);
 
-            const itemExistente = carrito.find(item => item.id === id);
-            if (itemExistente) {
-                itemExistente.cantidad += 1;
-            } else {
-                carrito.push({ id, nombre, precio, cantidad: 1 });
-            }
+            const itemExistente = carrito.find(i => i.id === id);
+            if (itemExistente) itemExistente.cantidad += 1;
+            else carrito.push({id,nombre,precio,cantidad:1});
 
             actualizarCarrito();
             mostrarNotificacionSobreProducto(producto, "Agregado al carrito!");
         });
     });
 
-    // Abrir modal solo cuando se hace clic
     carritoBtn.addEventListener('click', () => {
         modal.style.display = 'block';
         actualizarCarrito();
     });
 
-    // Cerrar modal
-    closeBtn.addEventListener('click', () => {
-        modal.style.display = 'none';
-    });
+    closeBtn.addEventListener('click', () => { modal.style.display = 'none'; });
 
-    window.addEventListener('click', (e) => {
-        if (e.target === modal) modal.style.display = 'none';
-    });
+    window.addEventListener('click', (e) => { if(e.target===modal) modal.style.display='none'; });
 
-    // WhatsApp
     whatsappBtn.addEventListener('click', () => {
-        if (carrito.length === 0) return alert("Tu carrito está vacío!");
-
-        let mensaje = "Hola! Quiero comprar:\n";
-        carrito.forEach(item => {
-            mensaje += `- ${item.nombre} x${item.cantidad}\n`;
-        });
-        mensaje += `Total: $${totalSpan.textContent}`;
-        const numero = "+543364398022";
-        const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
-        window.open(url, "_blank");
+        if(carrito.length===0) return alert("Tu carrito está vacío!");
+        let mensaje="Hola! Quiero comprar:\n";
+        carrito.forEach(i=>mensaje+=`- ${i.nombre} x${i.cantidad}\n`);
+        mensaje+=`Total: $${totalSpan.textContent}`;
+        const numero="+543364398022";
+        const url=`https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+        window.open(url,"_blank");
     });
 
-    // Inicializar contador de carrito sin abrir modal
     actualizarCarrito();
 });
