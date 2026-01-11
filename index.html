@@ -14,7 +14,11 @@
 <body>
 
 <header>
-    <img src="https://res.cloudinary.com/dfve19wea/image/upload/v1768145580/logo_artcolor.png" class="logo">
+    <img 
+        src="https://res.cloudinary.com/dfve19wea/image/upload/v1768145580/ov0nhljxru8zmdhbiqcg.jpg" 
+        alt="ArtColor" 
+        class="logo"
+    >
     <h1>ArtColor</h1>
     <nav>
         <a href="#productos">Productos</a>
@@ -28,21 +32,39 @@
 
     <div class="productos-grid">
 
-        <div class="producto" data-id="1" data-nombre="Sticker Personalizado" data-precio="500">
-            <img src="https://res.cloudinary.com/dfve19wea/image/upload/v1768146021/CIRCULAR_oyzt4r.png">
+        <div 
+            class="producto" 
+            data-id="1" 
+            data-nombre="Sticker Personalizado" 
+            data-precio="500"
+            data-imagen="https://res.cloudinary.com/dfve19wea/image/upload/v1768145580/sticker.jpg"
+        >
+            <img src="https://res.cloudinary.com/dfve19wea/image/upload/v1768145580/sticker.jpg">
             <h3>Sticker Personalizado</h3>
             <p>$500</p>
             <button class="agregar-carrito">Agregar al carrito</button>
         </div>
 
-        <div class="producto" data-id="2" data-nombre="Foto Impresa" data-precio="1000">
+        <div 
+            class="producto" 
+            data-id="2" 
+            data-nombre="Foto Impresa" 
+            data-precio="1000"
+            data-imagen="https://res.cloudinary.com/dfve19wea/image/upload/v1768145580/polaroid.jpg"
+        >
             <img src="https://res.cloudinary.com/dfve19wea/image/upload/v1768145580/polaroid.jpg">
             <h3>Foto Impresa</h3>
             <p>$1.000</p>
             <button class="agregar-carrito">Agregar al carrito</button>
         </div>
 
-        <div class="producto" data-id="3" data-nombre="Tatuaje Temporal" data-precio="800">
+        <div 
+            class="producto" 
+            data-id="3" 
+            data-nombre="Tatuaje Temporal" 
+            data-precio="800"
+            data-imagen="https://res.cloudinary.com/dfve19wea/image/upload/v1768145580/tatuaje.jpg"
+        >
             <img src="https://res.cloudinary.com/dfve19wea/image/upload/v1768145580/tatuaje.jpg">
             <h3>Tatuaje Temporal</h3>
             <p>$800</p>
@@ -52,12 +74,28 @@
     </div>
 </section>
 
+<!-- MODAL CARRITO -->
 <section id="carrito-modal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
+
         <h2>Tu carrito</h2>
+
+        <input 
+            type="text" 
+            id="cliente-nombre" 
+            placeholder="Tu nombre"
+        >
+
+        <textarea 
+            id="cliente-nota" 
+            placeholder="Aclaraciones (opcional)"
+        ></textarea>
+
         <ul id="carrito-lista"></ul>
+
         <p>Total: $<span id="total">0</span></p>
+
         <button id="comprar">Finalizar compra</button>
     </div>
 </section>
