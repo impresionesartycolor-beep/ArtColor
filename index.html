@@ -5,18 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ArtColor - Tienda de Arte Personalizado</title>
 
-    <!-- FUENTE -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
 
-    <!-- CSS -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <header>
-    <img src="images/LogoArtColor.png" class="logo" alt="ArtColor">
+    <img src="https://res.cloudinary.com/dfve19wea/image/upload/v1768145580/logo_artcolor.png" class="logo">
     <h1>ArtColor</h1>
     <nav>
         <a href="#productos">Productos</a>
@@ -30,67 +28,44 @@
 
     <div class="productos-grid">
 
-        <!-- PRODUCTO 1 -->
-        <div class="producto"
-             data-id="1"
-             data-nombre="Sticker Personalizado"
-             data-precio="500">
-
-            <img src="images/sticker.jpg" alt="Sticker Personalizado">
+        <div class="producto" data-id="1" data-nombre="Sticker Personalizado" data-precio="500">
+            <img src="https://res.cloudinary.com/dfve19wea/image/upload/v1768146021/CIRCULAR_oyzt4r.png">
             <h3>Sticker Personalizado</h3>
             <p>$500</p>
-
-            <input type="file" class="archivo" accept="image/*" required>
-            <button class="agregar-carrito">Agregar</button>
+            <button class="agregar-carrito">Agregar al carrito</button>
         </div>
 
-        <!-- PRODUCTO 2 -->
-        <div class="producto"
-             data-id="2"
-             data-nombre="Foto Impresa"
-             data-precio="1000">
-
-            <img src="images/Polaroid1.jpeg" alt="Foto Impresa">
+        <div class="producto" data-id="2" data-nombre="Foto Impresa" data-precio="1000">
+            <img src="https://res.cloudinary.com/dfve19wea/image/upload/v1768145580/polaroid.jpg">
             <h3>Foto Impresa</h3>
             <p>$1.000</p>
-
-            <input type="file" class="archivo" accept="image/*" required>
-            <button class="agregar-carrito">Agregar</button>
+            <button class="agregar-carrito">Agregar al carrito</button>
         </div>
 
-        <!-- PRODUCTO 3 -->
-        <div class="producto"
-             data-id="3"
-             data-nombre="Tatuaje Temporal"
-             data-precio="800">
-
-            <img src="images/tatuaje.jpg" alt="Tatuaje Temporal">
+        <div class="producto" data-id="3" data-nombre="Tatuaje Temporal" data-precio="800">
+            <img src="https://res.cloudinary.com/dfve19wea/image/upload/v1768145580/tatuaje.jpg">
             <h3>Tatuaje Temporal</h3>
             <p>$800</p>
-
-            <input type="file" class="archivo" accept="image/*" required>
-            <button class="agregar-carrito">Agregar</button>
+            <button class="agregar-carrito">Agregar al carrito</button>
         </div>
 
     </div>
 </section>
 
-<!-- MODAL CARRITO -->
 <section id="carrito-modal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
         <h2>Tu carrito</h2>
         <ul id="carrito-lista"></ul>
         <p>Total: $<span id="total">0</span></p>
-        <button id="whatsapp">Finalizar por WhatsApp</button>
+        <button id="comprar">Finalizar compra</button>
     </div>
 </section>
 
-<footer id="contacto">
+<footer>
     <p>&copy; 2026 ArtColor</p>
 </footer>
 
-<!-- JS -->
 <script src="script.js"></script>
 </body>
 </html>
