@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
-    // Actualizar carrito en UI
+    // Actualizar carrito y cantidades
     function actualizarCarrito() {
         carritoLista.innerHTML = '';
         let total = 0;
@@ -27,19 +27,16 @@ document.addEventListener('DOMContentLoaded', () => {
             carritoLista.appendChild(li);
             total += item.precio * item.cantidad;
 
-            // Botones +
             li.querySelector('.mas').addEventListener('click', () => {
                 item.cantidad += 1;
                 actualizarCarrito();
             });
 
-            // Botones -
             li.querySelector('.menos').addEventListener('click', () => {
                 if (item.cantidad > 1) item.cantidad -= 1;
                 actualizarCarrito();
             });
 
-            // Botón eliminar
             li.querySelector('.eliminar').addEventListener('click', () => {
                 carrito = carrito.filter(i => i.id !== item.id);
                 actualizarCarrito();
@@ -47,8 +44,27 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         totalSpan.textContent = total.toFixed(2);
-        carritoBtn.textContent = `Carrito (${carrito.length})`;
+        carritoBtn.textContent = `Carrito (${carrito.reduce((acc, i) => acc + i.cantidad, 0)})`;
+
+        // Actualiza contador visual de cada producto
+        document.querySelectorAll('.producto').forEach(prod => {
+            const id = prod.dataset.id;
+            const item = carrito.find(i => i.id === id);
+            prod.querySelector('.cantidad-agregada').textContent = item ? item.cantidad : 0;
+        });
+
         localStorage.setItem('carrito', JSON.stringify(carrito));
+    }
+
+    // Mostrar notificación sobre el producto
+    function mostrarNotificacionSobreProducto(producto, mensaje) {
+        const notif = document.createElement('div');
+        notif.classList.add('flotante-notificacion');
+        notif.textContent = mensaje;
+        producto.appendChild(notif);
+        setTimeout(() => {
+            notif.remove();
+        }, 1000); // dura 1 segundo
     }
 
     // Agregar productos al carrito
@@ -65,7 +81,9 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 carrito.push({ id, nombre, precio, cantidad: 1 });
             }
+
             actualizarCarrito();
+            mostrarNotificacionSobreProducto(producto, "Agregado al carrito!");
         });
     });
 
@@ -75,17 +93,16 @@ document.addEventListener('DOMContentLoaded', () => {
         actualizarCarrito();
     });
 
-    // Cerrar modal con X
+    // Cerrar modal
     closeBtn.addEventListener('click', () => {
         modal.style.display = 'none';
     });
 
-    // Cerrar modal al hacer click afuera
     window.addEventListener('click', (e) => {
         if (e.target === modal) modal.style.display = 'none';
     });
 
-    // Finalizar por WhatsApp
+    // WhatsApp
     whatsappBtn.addEventListener('click', () => {
         let mensaje = "Hola! Quiero comprar:\n";
         carrito.forEach(item => {
