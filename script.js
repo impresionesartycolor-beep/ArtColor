@@ -1,207 +1,88 @@
-<<<<<<< HEAD
 document.addEventListener('DOMContentLoaded', () => {
-
     const carritoBtn = document.getElementById('carrito-btn');
     const modal = document.getElementById('carrito-modal');
     const closeBtn = document.querySelector('.close');
     const carritoLista = document.getElementById('carrito-lista');
     const totalSpan = document.getElementById('total');
-    const comprarBtn = document.getElementById('comprar');
+    const whatsappBtn = document.getElementById('whatsapp');
 
-    const WHATSAPP_NUMBER = "5493364398022"; // tu número
-
-    // Recuperar carrito
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
-    // Función para actualizar carrito
+    // Actualiza carrito en UI
     function actualizarCarrito() {
         carritoLista.innerHTML = '';
         let total = 0;
-
-        carrito.forEach(item => {
-            const precio = parseFloat(item.precio); // convertir a número
-            const cantidad = item.cantidad || 1; // si no existe, tomar 1
-            const subtotal = precio * cantidad;
-
+        carrito.forEach((item, index) => {
             const li = document.createElement('li');
-            li.textContent = `${item.nombre} x${cantidad} - $${subtotal}`;
+            li.textContent = `${item.nombre} x${item.cantidad} - $${(item.precio * item.cantidad).toFixed(2)}`;
             carritoLista.appendChild(li);
-
-            total += subtotal;
+            total += item.precio * item.cantidad;
         });
-
-        totalSpan.textContent = total;
-        carritoBtn.textContent = `Carrito (${carrito.length})`;
-
+        totalSpan.textContent = total.toFixed(2);
+        carritoBtn.textContent = `Carrito (${carrito.reduce((sum, item) => sum + item.cantidad, 0)})`;
         localStorage.setItem('carrito', JSON.stringify(carrito));
     }
 
     // Agregar producto al carrito
     document.querySelectorAll('.agregar-carrito').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const producto = btn.closest('.producto');
-
+        btn.addEventListener('click', (e) => {
+            const producto = e.target.closest('.producto');
             const id = producto.dataset.id;
             const nombre = producto.dataset.nombre;
             const precio = parseFloat(producto.dataset.precio);
-            const cantidad = 1; // Siempre 1 por ahora
 
-            const existente = carrito.find(item => item.id === id);
-
-            if (existente) {
-                existente.cantidad += cantidad;
+            // Verificar si ya existe en el carrito
+            const existing = carrito.find(item => item.id === id);
+            if (existing) {
+                existing.cantidad += 1;
             } else {
-                carrito.push({ id, nombre, precio, cantidad });
+                carrito.push({ id, nombre, precio, cantidad: 1 });
             }
 
             actualizarCarrito();
-            alert('Producto agregado al carrito');
         });
     });
 
-    // Abrir y cerrar modal
+    // Mostrar modal
     carritoBtn.addEventListener('click', () => {
         modal.style.display = 'block';
         actualizarCarrito();
     });
 
+    // Cerrar modal
     closeBtn.addEventListener('click', () => {
         modal.style.display = 'none';
     });
 
-    // Finalizar compra por WhatsApp
-    comprarBtn.addEventListener('click', () => {
-        if (carrito.length === 0) return alert('El carrito está vacío');
+    // Cerrar modal al hacer click fuera del contenido
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) modal.style.display = 'none';
+    });
 
-        const nombre = document.getElementById('cliente-nombre').value.trim();
-        const nota = document.getElementById('cliente-nota').value.trim();
+    // Finalizar por WhatsApp
+    whatsappBtn.addEventListener('click', () => {
+        if (carrito.length === 0) {
+            alert("El carrito está vacío.");
+            return;
+        }
 
-        if (!nombre) return alert('Por favor ingresá tu nombre');
-
-        let mensaje = `Hola! Quiero hacer el siguiente pedido:\n\nNombre: ${nombre}\n`;
-        if (nota) mensaje += `Aclaración: ${nota}\n`;
-        mensaje += `\n`;
-
-        let total = 0;
-
+        const numero = "+543364398022"; // tu número
+        let mensaje = "¡Hola! Quiero realizar la siguiente compra:%0A";
         carrito.forEach(item => {
-            const precio = parseFloat(item.precio);
-            const cantidad = item.cantidad || 1;
-            const subtotal = precio * cantidad;
-            mensaje += `• ${item.nombre} x${cantidad} - $${subtotal}\n`;
-            total += subtotal;
+            mensaje += `- ${item.nombre} x${item.cantidad} - $${(item.precio * item.cantidad).toFixed(2)}%0A`;
         });
+        const total = carrito.reduce((sum, item) => sum + item.precio * item.cantidad, 0);
+        mensaje += `Total: $${total.toFixed(2)}`;
 
-        mensaje += `\nTotal: $${total}`;
-
-        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`;
+        const url = `https://api.whatsapp.com/send?phone=${numero}&text=${mensaje}`;
         window.open(url, '_blank');
-    });
 
-    // Inicializar
-    actualizarCarrito();
-});
-=======
-document.addEventListener('DOMContentLoaded', () => {
-
-    const carritoBtn = document.getElementById('carrito-btn');
-    const modal = document.getElementById('carrito-modal');
-    const closeBtn = document.querySelector('.close');
-    const carritoLista = document.getElementById('carrito-lista');
-    const totalSpan = document.getElementById('total');
-    const comprarBtn = document.getElementById('comprar');
-
-    const WHATSAPP_NUMBER = "5493364398022"; // tu número
-
-    // Recuperar carrito
-    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-
-    // Función para actualizar carrito
-    function actualizarCarrito() {
-        carritoLista.innerHTML = '';
-        let total = 0;
-
-        carrito.forEach(item => {
-            const precio = parseFloat(item.precio); // convertir a número
-            const cantidad = item.cantidad || 1; // si no existe, tomar 1
-            const subtotal = precio * cantidad;
-
-            const li = document.createElement('li');
-            li.textContent = `${item.nombre} x${cantidad} - $${subtotal}`;
-            carritoLista.appendChild(li);
-
-            total += subtotal;
-        });
-
-        totalSpan.textContent = total;
-        carritoBtn.textContent = `Carrito (${carrito.length})`;
-
-        localStorage.setItem('carrito', JSON.stringify(carrito));
-    }
-
-    // Agregar producto al carrito
-    document.querySelectorAll('.agregar-carrito').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const producto = btn.closest('.producto');
-
-            const id = producto.dataset.id;
-            const nombre = producto.dataset.nombre;
-            const precio = parseFloat(producto.dataset.precio);
-            const cantidad = 1; // Siempre 1 por ahora
-
-            const existente = carrito.find(item => item.id === id);
-
-            if (existente) {
-                existente.cantidad += cantidad;
-            } else {
-                carrito.push({ id, nombre, precio, cantidad });
-            }
-
-            actualizarCarrito();
-            alert('Producto agregado al carrito');
-        });
-    });
-
-    // Abrir y cerrar modal
-    carritoBtn.addEventListener('click', () => {
-        modal.style.display = 'block';
+        // Vaciar carrito después de enviar
+        carrito = [];
         actualizarCarrito();
-    });
-
-    closeBtn.addEventListener('click', () => {
         modal.style.display = 'none';
     });
 
-    // Finalizar compra por WhatsApp
-    comprarBtn.addEventListener('click', () => {
-        if (carrito.length === 0) return alert('El carrito está vacío');
-
-        const nombre = document.getElementById('cliente-nombre').value.trim();
-        const nota = document.getElementById('cliente-nota').value.trim();
-
-        if (!nombre) return alert('Por favor ingresá tu nombre');
-
-        let mensaje = `Hola! Quiero hacer el siguiente pedido:\n\nNombre: ${nombre}\n`;
-        if (nota) mensaje += `Aclaración: ${nota}\n`;
-        mensaje += `\n`;
-
-        let total = 0;
-
-        carrito.forEach(item => {
-            const precio = parseFloat(item.precio);
-            const cantidad = item.cantidad || 1;
-            const subtotal = precio * cantidad;
-            mensaje += `• ${item.nombre} x${cantidad} - $${subtotal}\n`;
-            total += subtotal;
-        });
-
-        mensaje += `\nTotal: $${total}`;
-
-        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`;
-        window.open(url, '_blank');
-    });
-
-    // Inicializar
+    // Inicializar carrito al cargar la página
     actualizarCarrito();
 });
->>>>>>> 0ca5abd5520e179513fc7a8144fb2a14ad5ae436

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -15,11 +14,7 @@
 <body>
 
 <header>
-    <img 
-        src="images/LogoArtColor.png" 
-        alt="ArtColor" 
-        class="logo"
-    >
+    <img src="images/LogoArtColor.png" alt="ArtColor Logo" class="logo">
     <h1>ArtColor</h1>
     <nav>
         <a href="#productos">Productos</a>
@@ -30,59 +25,51 @@
 
 <section id="productos">
     <h2>Nuestros Productos</h2>
-
     <div class="productos-grid">
 
-        <!-- Producto 1 -->
         <div class="producto" data-id="1" data-nombre="Sticker Personalizado" data-precio="500">
-            <img src="images/Polaroid1.jpeg" alt="Sticker Personalizado">
+            <img src="images/sticker.jpg" alt="Sticker">
             <h3>Sticker Personalizado</h3>
             <p>$500</p>
-            <button class="agregar-carrito">Agregar al carrito</button>
+            <button class="agregar-carrito">Agregar</button>
         </div>
 
-        <!-- Producto 2 -->
         <div class="producto" data-id="2" data-nombre="Foto Impresa" data-precio="1000">
-            <img src="https://res.cloudinary.com/dfve19wea/image/upload/v1768145580/polaroid.jpg" alt="Foto Impresa">
+            <img src="images/Polaroid1.jpeg" alt="Foto Impresa">
             <h3>Foto Impresa</h3>
             <p>$1.000</p>
-            <button class="agregar-carrito">Agregar al carrito</button>
+            <button class="agregar-carrito">Agregar</button>
         </div>
 
-        <!-- Producto 3 -->
         <div class="producto" data-id="3" data-nombre="Tatuaje Temporal" data-precio="800">
-            <img src="https://res.cloudinary.com/dfve19wea/image/upload/v1768145580/tatuaje.jpg" alt="Tatuaje Temporal">
+            <img src="images/tatuaje.jpg" alt="Tatuaje Temporal">
             <h3>Tatuaje Temporal</h3>
             <p>$800</p>
-            <button class="agregar-carrito">Agregar al carrito</button>
+            <button class="agregar-carrito">Agregar</button>
         </div>
 
     </div>
 </section>
 
+<!-- MODAL CARRITO -->
 <section id="carrito-modal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
-
         <h2>Tu carrito</h2>
-
-        <input 
-            type="text" 
-            id="cliente-nombre" 
-            placeholder="Tu nombre"
-        >
-
-        <textarea 
-            id="cliente-nota" 
-            placeholder="Aclaraciones (opcional)"
-        ></textarea>
-
         <ul id="carrito-lista"></ul>
-
         <p>Total: $<span id="total">0</span></p>
-
-        <button id="comprar">Finalizar compra</button>
+        <button id="whatsapp">Finalizar por WhatsApp</button>
     </div>
+</section>
+
+<section id="contacto">
+    <h2>Contacto</h2>
+    <form>
+        <input type="text" placeholder="Nombre" required>
+        <input type="email" placeholder="Email" required>
+        <textarea placeholder="Mensaje"></textarea>
+        <button type="submit">Enviar</button>
+    </form>
 </section>
 
 <footer>
@@ -92,98 +79,3 @@
 <script src="script.js"></script>
 </body>
 </html>
-=======
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ArtColor - Tienda de Arte Personalizado</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-
-<header>
-    <img 
-        src="images/LogoArtColor.png" 
-        alt="ArtColor" 
-        class="logo"
-    >
-    <h1>ArtColor</h1>
-    <nav>
-        <a href="#productos">Productos</a>
-        <a href="#contacto">Contacto</a>
-        <button id="carrito-btn">Carrito (0)</button>
-    </nav>
-</header>
-
-<section id="productos">
-    <h2>Nuestros Productos</h2>
-
-    <div class="productos-grid">
-
-        <!-- Producto 1 -->
-        <div class="producto" data-id="1" data-nombre="Sticker Personalizado" data-precio="500">
-            <img src="images/Polaroid1.jpeg" alt="Sticker Personalizado">
-            <h3>Sticker Personalizado</h3>
-            <p>$500</p>
-            <button class="agregar-carrito">Agregar al carrito</button>
-        </div>
-
-        <!-- Producto 2 -->
-        <div class="producto" data-id="2" data-nombre="Foto Impresa" data-precio="1000">
-            <img src="https://res.cloudinary.com/dfve19wea/image/upload/v1768145580/polaroid.jpg" alt="Foto Impresa">
-            <h3>Foto Impresa</h3>
-            <p>$1.000</p>
-            <button class="agregar-carrito">Agregar al carrito</button>
-        </div>
-
-        <!-- Producto 3 -->
-        <div class="producto" data-id="3" data-nombre="Tatuaje Temporal" data-precio="800">
-            <img src="https://res.cloudinary.com/dfve19wea/image/upload/v1768145580/tatuaje.jpg" alt="Tatuaje Temporal">
-            <h3>Tatuaje Temporal</h3>
-            <p>$800</p>
-            <button class="agregar-carrito">Agregar al carrito</button>
-        </div>
-
-    </div>
-</section>
-
-<section id="carrito-modal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-
-        <h2>Tu carrito</h2>
-
-        <input 
-            type="text" 
-            id="cliente-nombre" 
-            placeholder="Tu nombre"
-        >
-
-        <textarea 
-            id="cliente-nota" 
-            placeholder="Aclaraciones (opcional)"
-        ></textarea>
-
-        <ul id="carrito-lista"></ul>
-
-        <p>Total: $<span id="total">0</span></p>
-
-        <button id="comprar">Finalizar compra</button>
-    </div>
-</section>
-
-<footer>
-    <p>&copy; 2026 ArtColor</p>
-</footer>
-
-<script src="script.js"></script>
-</body>
-</html>
->>>>>>> 0ca5abd5520e179513fc7a8144fb2a14ad5ae436
