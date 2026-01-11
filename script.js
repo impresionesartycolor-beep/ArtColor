@@ -15,9 +15,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
         carrito.forEach(item => {
             const li = document.createElement('li');
-            li.textContent = `${item.nombre} x${item.cantidad} - $${item.precio * item.cantidad}`;
+            li.innerHTML = `
+                ${item.nombre} - $${item.precio * item.cantidad}
+                <div class="cantidad-controls">
+                    <button class="menos">-</button>
+                    <span>${item.cantidad}</span>
+                    <button class="mas">+</button>
+                    <button class="eliminar">x</button>
+                </div>
+            `;
             carritoLista.appendChild(li);
             total += item.precio * item.cantidad;
+
+            // Botones +
+            li.querySelector('.mas').addEventListener('click', () => {
+                item.cantidad += 1;
+                actualizarCarrito();
+            });
+
+            // Botones -
+            li.querySelector('.menos').addEventListener('click', () => {
+                if (item.cantidad > 1) item.cantidad -= 1;
+                actualizarCarrito();
+            });
+
+            // Botón eliminar
+            li.querySelector('.eliminar').addEventListener('click', () => {
+                carrito = carrito.filter(i => i.id !== item.id);
+                actualizarCarrito();
+            });
         });
 
         totalSpan.textContent = total.toFixed(2);
@@ -26,21 +52,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Agregar productos al carrito
-    document.querySelectorAll('.agregar-carrito').forEach((btn, index) => {
+    document.querySelectorAll('.agregar-carrito').forEach(btn => {
         btn.addEventListener('click', (e) => {
             const producto = e.target.closest('.producto');
             const id = producto.dataset.id;
             const nombre = producto.dataset.nombre;
             const precio = parseFloat(producto.dataset.precio);
 
-            // Si ya existe el producto en carrito, aumentamos cantidad
             const itemExistente = carrito.find(item => item.id === id);
             if (itemExistente) {
                 itemExistente.cantidad += 1;
             } else {
                 carrito.push({ id, nombre, precio, cantidad: 1 });
             }
-
             actualizarCarrito();
         });
     });
@@ -58,9 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Cerrar modal al hacer click afuera
     window.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.style.display = 'none';
-        }
+        if (e.target === modal) modal.style.display = 'none';
     });
 
     // Finalizar por WhatsApp
@@ -75,6 +97,5 @@ document.addEventListener('DOMContentLoaded', () => {
         window.open(url, "_blank");
     });
 
-    // Inicializar carrito
     actualizarCarrito();
 });

@@ -20,7 +20,7 @@ header {
 .logo {
     height: 50px;
     width: auto;
-    margin-right: 1rem;
+    margin: 0 auto 0.5rem auto;
 }
 
 h1 {
@@ -129,6 +129,8 @@ button.agregar-carrito:hover {
     max-width: 400px;
     border: 2px solid #00FFFF;
     box-sizing: border-box;
+    overflow-y: auto;
+    max-height: 80%;
 }
 
 .close {
@@ -141,6 +143,29 @@ button.agregar-carrito:hover {
 
 .close:hover {
     color: #FF00FF;
+}
+
+#carrito-lista li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0.3rem;
+}
+
+.cantidad-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.cantidad-controls button {
+    padding: 0 0.4rem;
+    border-radius: 4px;
+    border: 1px solid #333;
+    background-color: #fff;
+    cursor: pointer;
 }
 
 /* CONTACTO */
