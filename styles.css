@@ -8,7 +8,7 @@
 html, body {
     margin: 0;
     padding: 0;
-    overflow-x: hidden; /* evita scroll horizontal en móviles */
+    overflow-x: hidden;
     font-family: 'Fredoka One', cursive;
     background-color: #f9f9f9;
     color: #333;
@@ -86,12 +86,9 @@ header {
     text-align: center;
     font-size: 32px;
     font-weight: bold;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     letter-spacing: 1px;
-    line-height: 1.2;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-
-    /* degradado tipo pop-art */
     background: linear-gradient(90deg, #00FFFF, #FF00FF, #FFFF00);
     -webkit-background-clip: text;
     background-clip: text;
@@ -122,9 +119,6 @@ header {
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     border: 2px solid #FFFF00;
     position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
 }
 
 .producto img {
@@ -132,19 +126,16 @@ header {
     height: auto;
     display: block;
     border-radius: 4px;
-    margin-bottom: 0.8rem;
 }
 
 .producto h3 {
     color: #00FFFF;
     font-size: 16px;
-    margin-bottom: 0.5rem;
 }
 
 .producto p {
     color: #FF00FF;
     font-size: 14px;
-    margin-bottom: 0.5rem;
 }
 
 button {
@@ -170,20 +161,6 @@ button:hover {
     margin-left: 0.5rem;
     font-weight: bold;
     color: #FF00FF;
-}
-
-/* ---------------- BOTONES + / - DIRECTOS ---------------- */
-.producto .cantidad-controls {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-    margin-top: 0.5rem;
-}
-
-.producto .cantidad-controls button {
-    padding: 0.3rem 0.6rem;
-    font-size: 14px;
 }
 
 /* ---------------- MODAL ---------------- */
@@ -245,34 +222,97 @@ button:hover {
     100% { opacity: 0; transform: translate(-50%, -60px); }
 }
 
+/* ---------------- CONTROLES CANTIDAD ---------------- */
+.cantidad-controls {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 5px;
+}
+
+.cantidad-controls button {
+    padding: 0.2rem 0.5rem;
+    font-size: 14px;
+}
+
+.cantidad-controls span {
+    min-width: 20px;
+    text-align: center;
+}
+
 /* ---------------- FORMULARIO CONTACTO ---------------- */
-form {
+#contacto {
+    padding: 3rem 1rem;
+    background-color: #fff8f0;
+    border-top: 4px solid #FF00FF;
+    border-bottom: 4px solid #00FFFF;
+    text-align: center;
+}
+
+#contacto h2 {
+    font-size: 32px;
+    color: #FF00FF;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    margin-bottom: 2rem;
+    letter-spacing: 1px;
+    background: linear-gradient(90deg, #00FFFF, #FF00FF, #FFFF00);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#contacto form {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    max-width: 400px;
+    gap: 1rem;
+    max-width: 500px;
     margin: auto;
     padding: 0 1rem;
 }
 
-form input, form textarea, form button {
+#contacto input,
+#contacto textarea {
     width: 100%;
-    padding: 0.5rem;
+    padding: 0.8rem;
     font-size: 14px;
+    border: 2px solid #00FFFF;
+    border-radius: 6px;
+    outline: none;
+    transition: all 0.3s ease;
 }
 
-form button {
-    background-color: #00FFFF;
+#contacto input:focus,
+#contacto textarea:focus {
+    border-color: #FF00FF;
+    box-shadow: 0 0 8px rgba(255,0,255,0.3);
+}
+
+#contacto button {
+    width: 50%;
+    margin: auto;
+    padding: 0.8rem;
+    font-size: 16px;
+    background: linear-gradient(90deg, #00FFFF, #FF00FF, #FFFF00);
     color: #333;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
     font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+#contacto button:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
 }
 
 /* ---------------- FOOTER ---------------- */
 footer {
     text-align: center;
-    padding: 1rem;
+    padding: 2rem 1rem;
     background: linear-gradient(90deg, #FFFF00 0%, #FF00FF 50%, #00FFFF 100%);
     color: #333;
+    font-size: 14px;
 }
 
 /* ---------------- RESPONSIVE MÓVIL ---------------- */
@@ -290,6 +330,7 @@ footer {
     }
 
     .logo { height: 40px; }
+
     .header-top h1 { font-size: 20px; }
 
     .header-nav {
@@ -299,16 +340,8 @@ footer {
         width: 100%;
     }
 
-    #productos h2 { font-size: 28px; margin-bottom: 1rem; }
     .producto h3 { font-size: 14px; }
     .producto p { font-size: 12px; }
     button { font-size: 12px; padding: 0.3rem 0.5rem; }
-    .producto .cantidad-controls button { font-size: 12px; padding: 0.2rem 0.4rem; }
-
-    /* muestra botones + / - debajo de cada producto en móvil */
-    .producto .cantidad-controls {
-        display: flex;
-        justify-content: center;
-        margin-top: 0.5rem;
-    }
+    .cantidad-controls button { padding: 0.2rem 0.4rem; font-size: 12px; }
 }
