@@ -83,21 +83,18 @@ header {
 
 /* ---------------- PRODUCTOS ---------------- */
 #productos h2 {
-    text-align: center; /* centra horizontalmente */
-    font-size: 32px;    /* más grande */
+    text-align: center;
+    font-size: 32px;
     font-weight: bold;
-    margin-bottom: 1.5rem; /* espacio debajo */
-    letter-spacing: 1px; /* espacio entre letras */
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.2); /* sombra suave */
+    margin-bottom: 2rem;
+    letter-spacing: 1px;
+    line-height: 1.2;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
 
-    /* efecto degradado tipo pop-art */
+    /* degradado tipo pop-art */
     background: linear-gradient(90deg, #00FFFF, #FF00FF, #FFFF00);
-
-    /* versión estándar para compatibilidad */
-    background-clip: text;
-
-    /* versión webkit para Chrome/Safari */
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
@@ -125,6 +122,9 @@ header {
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     border: 2px solid #FFFF00;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .producto img {
@@ -132,16 +132,19 @@ header {
     height: auto;
     display: block;
     border-radius: 4px;
+    margin-bottom: 0.8rem;
 }
 
 .producto h3 {
     color: #00FFFF;
     font-size: 16px;
+    margin-bottom: 0.5rem;
 }
 
 .producto p {
     color: #FF00FF;
     font-size: 14px;
+    margin-bottom: 0.5rem;
 }
 
 button {
@@ -167,6 +170,20 @@ button:hover {
     margin-left: 0.5rem;
     font-weight: bold;
     color: #FF00FF;
+}
+
+/* ---------------- BOTONES + / - DIRECTOS ---------------- */
+.producto .cantidad-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin-top: 0.5rem;
+}
+
+.producto .cantidad-controls button {
+    padding: 0.3rem 0.6rem;
+    font-size: 14px;
 }
 
 /* ---------------- MODAL ---------------- */
@@ -228,24 +245,6 @@ button:hover {
     100% { opacity: 0; transform: translate(-50%, -60px); }
 }
 
-/* ---------------- CONTROLES CANTIDAD ---------------- */
-.cantidad-controls {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    margin-top: 5px;
-}
-
-.cantidad-controls button {
-    padding: 0.2rem 0.5rem;
-    font-size: 14px;
-}
-
-.cantidad-controls span {
-    min-width: 20px;
-    text-align: center;
-}
-
 /* ---------------- FORMULARIO CONTACTO ---------------- */
 form {
     display: flex;
@@ -291,7 +290,6 @@ footer {
     }
 
     .logo { height: 40px; }
-
     .header-top h1 { font-size: 20px; }
 
     .header-nav {
@@ -301,8 +299,16 @@ footer {
         width: 100%;
     }
 
+    #productos h2 { font-size: 28px; margin-bottom: 1rem; }
     .producto h3 { font-size: 14px; }
     .producto p { font-size: 12px; }
     button { font-size: 12px; padding: 0.3rem 0.5rem; }
-    .cantidad-controls button { padding: 0.2rem 0.4rem; font-size: 12px; }
+    .producto .cantidad-controls button { font-size: 12px; padding: 0.2rem 0.4rem; }
+
+    /* muestra botones + / - debajo de cada producto en móvil */
+    .producto .cantidad-controls {
+        display: flex;
+        justify-content: center;
+        margin-top: 0.5rem;
+    }
 }
