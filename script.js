@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
             else carrito.push({id,nombre,precio,cantidad:1});
 
             actualizarCarrito();
-            mostrarNotificacionSobreProducto(producto, "Agregado al carrito!");
+            mostrarNotificacionSobreProducto(producto, "¡Agregado al carrito!");
         });
     });
 
@@ -91,11 +91,4 @@ document.addEventListener('DOMContentLoaded', () => {
         if(carrito.length===0) return alert("Tu carrito está vacío!");
         let mensaje="Hola! Quiero comprar:\n";
         carrito.forEach(i=>mensaje+=`- ${i.nombre} x${i.cantidad}\n`);
-        mensaje+=`Total: $${totalSpan.textContent}`;
-        const numero="+543364398022";
-        const url=`https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
-        window.open(url,"_blank");
-    });
-
-    actualizarCarrito();
-});
+        mensaje+=`Total: $${totalSpan
