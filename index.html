@@ -20,19 +20,17 @@
             <h1>ArtColor</h1>
         </div>
         <nav class="header-nav">
-            <a href="#productos">Productos</a>
-            <a href="#pines">Pines</a>
-            <a href="#contacto">Contacto</a>
+            <a href="#productos" class="scroll-link">Productos</a>
+            <a href="#pines" class="scroll-link">Pines</a>
+            <a href="#contacto" class="scroll-link">Contacto</a>
             <button id="carrito-btn">Carrito (0)</button>
         </nav>
     </div>
 </header>
 
-<!-- SECCIÓN PRODUCTOS -->
 <section id="productos">
     <h2>Nuestros Productos</h2>
     <div class="productos-grid">
-
         <div class="producto" data-id="1" data-nombre="Sticker Personalizado" data-precio="4000">
             <img src="images/stickers.png" alt="sticker">
             <h3>Sticker Personalizado x 15 Unidades de 5x5cm</h3>
@@ -56,15 +54,14 @@
             <button class="agregar-carrito">Agregar</button>
             <span class="cantidad-agregada">0</span>
         </div>
-
     </div>
 </section>
 
-<!-- SECCIÓN PINES -->
 <section id="pines">
-    <h2>Pines para Crocs</h2>
-    <div class="productos-grid" id="pines-grid">
-        <!-- Pines se agregan desde script.js -->
+    <h2>Pines para crocs</h2>
+    <p class="promo">50% de descuento en la segunda unidad</p>
+    <div id="pines-grid" class="productos-grid">
+        <!-- Pines se cargan dinámicamente -->
     </div>
 </section>
 
@@ -79,7 +76,6 @@
     </div>
 </section>
 
-<!-- CONTACTO -->
 <section id="contacto">
     <h2>Contacto</h2>
     <form>

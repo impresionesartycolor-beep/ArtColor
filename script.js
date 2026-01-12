@@ -17,8 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
         carrito.forEach(item => {
             const li = document.createElement('li');
             li.innerHTML = `
-                <img src="images/${item.tipo === 'pin' ? 'pines/' : ''}${item.archivo}" alt="${item.nombre}" style="width:40px; height:auto; margin-right:5px;">
-                <strong>${item.nombre}</strong> - $${(item.precio * item.cantidad).toFixed(2)}
+                <img src="images/${item.tipo==='pin'?'pines/':''}${item.archivo}" alt="${item.nombre}">
+                <strong>${item.nombre}</strong> - $${(item.precio*item.cantidad).toFixed(2)}
                 <div class="cantidad-controls">
                     <button class="menos">-</button>
                     <span>${item.cantidad}</span>
@@ -27,66 +27,61 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             `;
             carritoLista.appendChild(li);
-            total += item.precio * item.cantidad;
+            total += item.precio*item.cantidad;
 
-            if(item.tipo === 'pin') {
-                totalPines += item.cantidad;
-                for(let i=0;i<item.cantidad;i++){
-                    pinesItems.push(item.precio);
-                }
+            if(item.tipo==='pin'){
+                totalPines+=item.cantidad;
+                for(let i=0;i<item.cantidad;i++){ pinesItems.push(item.precio); }
             }
 
-            li.querySelector('.mas').addEventListener('click', () => { item.cantidad += 1; actualizarCarrito(); });
-            li.querySelector('.menos').addEventListener('click', () => { if(item.cantidad>1) item.cantidad-=1; actualizarCarrito(); });
-            li.querySelector('.eliminar').addEventListener('click', () => { carrito = carrito.filter(i=>i.id!==item.id); actualizarCarrito(); });
+            li.querySelector('.mas').addEventListener('click',()=>{ item.cantidad+=1; actualizarCarrito(); });
+            li.querySelector('.menos').addEventListener('click',()=>{ if(item.cantidad>1)item.cantidad-=1; actualizarCarrito(); });
+            li.querySelector('.eliminar').addEventListener('click',()=>{ carrito = carrito.filter(i=>i.id!==item.id); actualizarCarrito(); });
         });
 
         // Descuento 50% cada 2 pines
-        let totalDescuento = 0;
-        if(totalPines >= 2){
+        let totalDescuento=0;
+        if(totalPines>=2){
             pinesItems.sort((a,b)=>b-a);
-            let pares = Math.floor(totalPines / 2);
-            for(let i=0;i<pares;i++){
-                totalDescuento += pinesItems[i] * 0.5;
-            }
+            let pares = Math.floor(totalPines/2);
+            for(let i=0;i<pares;i++){ totalDescuento+=pinesItems[i]*0.5; }
             total -= totalDescuento;
         }
 
-        // Mostrar descuento en el carrito
         const descuentoExistente = document.getElementById('descuento');
         if(descuentoExistente) descuentoExistente.remove();
-        if(totalDescuento > 0){
+        if(totalDescuento>0){
             const p = document.createElement('p');
-            p.id = "descuento";
-            p.style.fontWeight = "bold";
-            p.style.color = "#FF00FF";
+            p.id="descuento";
+            p.style.fontWeight="bold";
+            p.style.color="#FF00FF";
             p.textContent = `Descuento aplicado: $${totalDescuento.toFixed(2)}`;
-            modal.querySelector('.modal-content').insertBefore(p, totalSpan.parentElement);
+            modal.querySelector('.modal-content').insertBefore(p,totalSpan.parentElement);
         }
 
         totalSpan.textContent = total.toFixed(2);
         carritoBtn.textContent = `Carrito (${carrito.reduce((acc,i)=>acc+i.cantidad,0)})`;
 
-        document.querySelectorAll('.producto').forEach(prod => {
-            const id = prod.dataset.id;
-            const item = carrito.find(i => i.id === id);
-            prod.querySelector('.cantidad-agregada').textContent = item ? item.cantidad : 0;
+        document.querySelectorAll('.producto').forEach(prod=>{
+            const id=prod.dataset.id;
+            const item = carrito.find(i=>i.id===id);
+            prod.querySelector('.cantidad-agregada').textContent = item?item.cantidad:0;
         });
 
-        localStorage.setItem('carrito', JSON.stringify(carrito));
+        localStorage.setItem('carrito',JSON.stringify(carrito));
     }
 
-    function mostrarNotificacionSobreProducto(producto, mensaje) {
+    function mostrarNotificacionSobreProducto(producto,mensaje){
         const notif = document.createElement('div');
         notif.classList.add('flotante-notificacion');
-        notif.textContent = mensaje;
+        notif.textContent=mensaje;
         producto.appendChild(notif);
         setTimeout(()=>notif.remove(),1000);
     }
 
-    // Productos normales
-    document.querySelectorAll('.agregar-carrito').forEach(btn => {
-        btn.addEventListener('click', (e)=>{
+    // Delegación de eventos para todos los botones agregar-carrito
+    document.addEventListener('click', e=>{
+        if(e.target.classList.contains('agregar-carrito')){
             const producto = e.target.closest('.producto');
             const id = producto.dataset.id;
             const nombre = producto.dataset.nombre;
@@ -95,19 +90,19 @@ document.addEventListener('DOMContentLoaded', () => {
             const tipo = producto.dataset.tipo || 'producto';
 
             const itemExistente = carrito.find(i=>i.id===id);
-            if(itemExistente) itemExistente.cantidad+=1;
-            else carrito.push({id,nombre,precio,cantidad:1,archivo: archivo.split('/').pop(), tipo });
+            if(itemExistente)itemExistente.cantidad+=1;
+            else carrito.push({id,nombre,precio,cantidad:1,archivo:archivo.split('/').pop(),tipo});
 
             actualizarCarrito();
-            mostrarNotificacionSobreProducto(producto, "Agregado al carrito!");
-        });
+            mostrarNotificacionSobreProducto(producto,"Agregado al carrito!");
+        }
     });
 
-    carritoBtn.addEventListener('click', ()=>{ modal.style.display='block'; actualizarCarrito(); });
-    closeBtn.addEventListener('click', ()=>{ modal.style.display='none'; });
-    window.addEventListener('click', (e)=>{ if(e.target===modal) modal.style.display='none'; });
+    carritoBtn.addEventListener('click',()=>{ modal.style.display='block'; actualizarCarrito(); });
+    closeBtn.addEventListener('click',()=>{ modal.style.display='none'; });
+    window.addEventListener('click', e=>{ if(e.target===modal) modal.style.display='none'; });
 
-    whatsappBtn.addEventListener('click', ()=>{
+    whatsappBtn.addEventListener('click',()=>{
         if(carrito.length===0) return alert("Tu carrito está vacío!");
         let mensaje="Hola! Quiero comprar:\n";
         carrito.forEach(i=>mensaje+=`- ${i.nombre} x${i.cantidad}\n`);
@@ -116,51 +111,35 @@ document.addEventListener('DOMContentLoaded', () => {
         window.open(`https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`,"_blank");
     });
 
-    // ---------------- AUTOMÁTICO: PINES ----------------
+    // ---------------- PINES INFINITOS ----------------
     const pinesGrid = document.getElementById("pines-grid");
-    let nextId = 4; // IDs después de productos normales
-
-    // Pines del 1 al 1000
-    for(let i=1; i<=1000; i++){
-        const imgPath = `images/pines/${i}.jpg`;
+    const pines = [];
+    for(let i=1;i<=1000;i++){
+        pines.push({archivo:`${i}.jpg`,nombre:`Pin ${i}`,precio:2000});
+    }
+    let nextId=3;
+    pines.forEach(pin=>{
         const img = new Image();
-        img.src = imgPath;
-
-        // Solo agregar el pin si la imagen existe
-        img.onload = () => {
+        img.src=`images/pines/${pin.archivo}`;
+        img.onload=()=>{
             nextId++;
-            const div = document.createElement("div");
-            div.classList.add("producto");
-            div.dataset.id = nextId.toString();
-            div.dataset.nombre = `Pin ${i}`;
-            div.dataset.precio = 2000;
-            div.dataset.tipo = "pin";
+            const div=document.createElement('div');
+            div.classList.add('producto');
+            div.dataset.id=nextId.toString();
+            div.dataset.nombre=pin.nombre;
+            div.dataset.precio=pin.precio;
+            div.dataset.tipo='pin';
 
-            div.innerHTML = `
-                <img src="${imgPath}" alt="Pin ${i}">
-                <h3>Pin ${i}</h3>
-                <p>$2000</p>
+            div.innerHTML=`
+                <img src="images/pines/${pin.archivo}" alt="${pin.nombre}">
+                <h3>${pin.nombre}</h3>
+                <p>$${pin.precio}</p>
                 <button class="agregar-carrito">Agregar</button>
                 <span class="cantidad-agregada">0</span>
             `;
-
             pinesGrid.appendChild(div);
-
-            div.querySelector(".agregar-carrito").addEventListener("click",(e)=>{
-                const id = div.dataset.id;
-                const nombre = div.dataset.nombre;
-                const precio = parseFloat(div.dataset.precio);
-
-                const itemExistente = carrito.find(i=>i.id===id);
-                if(itemExistente) itemExistente.cantidad+=1;
-                else carrito.push({id,nombre,precio,cantidad:1,archivo:`${i}.jpg`, tipo:'pin'});
-
-                actualizarCarrito();
-                mostrarNotificacionSobreProducto(div, "Agregado al carrito!");
-            });
         };
-        // Si la imagen no existe, no hace nada y el pin no se agrega
-    }
+    });
 
     actualizarCarrito();
 });

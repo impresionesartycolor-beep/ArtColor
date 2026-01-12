@@ -1,17 +1,16 @@
 /* ---------------- GENERAL ---------------- */
 *,
 *::before,
-*::after {
-    box-sizing: border-box;
-}
+*::after { box-sizing: border-box; }
 
 html, body {
     margin: 0;
     padding: 0;
-    overflow-x: hidden; /* evita scroll horizontal en móviles */
+    overflow-x: hidden;
     font-family: 'Fredoka One', cursive;
     background-color: #f9f9f9;
     color: #333;
+    scroll-behavior: smooth;
 }
 
 /* ---------------- HEADER ---------------- */
@@ -39,15 +38,8 @@ header {
     gap: 1rem;
 }
 
-.logo {
-    height: 50px;
-    width: auto;
-}
-
-.header-top h1 {
-    margin: 0;
-    font-size: 30px; /* un poco más grande */
-}
+.logo { height: 50px; width: auto; }
+.header-top h1 { margin:0; font-size:24px; }
 
 .header-nav {
     display: flex;
@@ -59,14 +51,10 @@ header {
     color: #333;
     text-decoration: none;
     font-weight: bold;
-    font-size: 16px;
-    transition: color 0.3s ease;
+    font-size: 14px;
 }
 
-.header-nav a:hover {
-    color: #fff; /* letras blancas al pasar el mouse */
-}
-
+.header-nav a:hover { color: #fff; }
 #carrito-btn {
     background-color: #FFFF00;
     color: #333;
@@ -75,37 +63,33 @@ header {
     cursor: pointer;
     border-radius: 4px;
     font-weight: bold;
-    font-size: 14px;
 }
+#carrito-btn:hover { background-color: #00FFFF; }
 
-#carrito-btn:hover {
-    background-color: #00FFFF;
-}
-
-/* ---------------- IMÁGENES EN EL CARRITO ---------------- */
-#carrito-lista li img {
-    width: 40px;   /* tamaño pequeño */
-    height: 40px;
-    object-fit: contain;
-    margin-right: 10px;
-    vertical-align: middle;
-}
-
-
-/* ---------------- PRODUCTOS ---------------- */
-#productos h2 {
-    text-align: center; /* centra horizontalmente */
-    font-size: 40px;    /* un 25% más grande que antes */
-    font-weight: bold;
-    margin-bottom: 2rem; /* espacio debajo */
-    letter-spacing: 1px; /* espacio entre letras */
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.2); /* sombra suave */
+/* ---------------- TITULOS ---------------- */
+h2 {
+    text-align: center;
+    font-size: 40px;
+    margin-bottom: 1.5rem;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
     background: linear-gradient(90deg, #00FFFF, #FF00FF, #FFFF00);
-    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
+/* ---------------- PROMOCIÓN PINES ---------------- */
+.promo {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #FF00FF;
+    transform: rotate(-5deg);
+    margin-bottom: 1rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+/* ---------------- PRODUCTOS ---------------- */
 .productos-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -114,13 +98,8 @@ header {
     width: 100%;
 }
 
-@media (min-width: 500px) {
-    .productos-grid { grid-template-columns: repeat(2, 1fr); }
-}
-
-@media (min-width: 900px) {
-    .productos-grid { grid-template-columns: repeat(3, 1fr); }
-}
+@media (min-width: 500px) { .productos-grid { grid-template-columns: repeat(2,1fr); } }
+@media (min-width: 900px) { .productos-grid { grid-template-columns: repeat(3,1fr); } }
 
 .producto {
     background: white;
@@ -132,32 +111,27 @@ header {
     position: relative;
 }
 
-/* ---------------- IMÁGENES PRODUCTOS ---------------- */
 .producto img {
-    width: 200px; /* tamaño más pequeño */
-    height: 200px;
-    object-fit: contain;
+    max-width: 120px;
+    height: auto;
+    display: block;
+    margin: 0 auto 0.5rem;
     border-radius: 4px;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s;
 }
+.producto img:hover { transform: scale(1.2); }
 
-.producto img:hover {
-    transform: scale(1.2);
-}
-
-/* ---------------- PRODUCTOS H3 Y PRECIO ---------------- */
 .producto h3 {
     color: #000;
-    font-size: 18px; /* un poco más grande */
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.1); /* sombra muy sutil */
+    font-size: 18px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
 }
 
 .producto p {
     color: #FF00FF;
-    font-size: 16px; /* un poco más grande */
+    font-size: 16px;
 }
 
-/* ---------------- BOTONES ---------------- */
 button {
     font-family: 'Fredoka One', cursive;
     font-size: 14px;
@@ -170,164 +144,53 @@ button {
     font-weight: bold;
     transition: all 0.3s ease;
 }
+button:hover { background-color: #FF00FF; transform: scale(1.05); }
 
-button:hover {
-    background-color: #FF00FF;
-    transform: scale(1.05);
-}
-
-.cantidad-agregada {
-    display: inline-block;
-    margin-left: 0.5rem;
-    font-weight: bold;
-    color: #FF00FF;
-}
+.cantidad-agregada { display:inline-block; margin-left:0.5rem; font-weight:bold; color:#FF00FF; }
 
 /* ---------------- MODAL ---------------- */
 .modal {
     display: none;
     position: fixed;
     z-index: 999;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow-y: auto;
+    left:0; top:0;
+    width:100%; height:100%;
+    overflow-y:auto;
     background-color: rgba(0,0,0,0.6);
     padding: 1rem;
 }
 
 .modal-content {
-    background-color: white;
-    margin: 5% auto;
-    padding: 20px;
-    width: 100%;
-    max-width: 400px;
-    border-radius: 8px;
-    border: 2px solid #00FFFF;
+    background-color:white;
+    margin:5% auto;
+    padding:20px;
+    width:100%;
+    max-width:500px;
+    border-radius:8px;
+    border:2px solid #00FFFF;
 }
 
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-}
+.modal-content ul li img { width:40px; height:auto; margin-right:5px; vertical-align:middle; }
 
-.close:hover {
-    color: #FF00FF;
-}
+.close { color:#aaa; float:right; font-size:28px; font-weight:bold; cursor:pointer; }
+.close:hover { color:#FF00FF; }
 
-/* ---------------- NOTIFICACIÓN ---------------- */
-.flotante-notificacion {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translate(-50%, -100%);
-    background-color: #00FFFF;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    color: #333;
-    font-weight: bold;
-    box-shadow: 0 0 8px rgba(0,0,0,0.2);
-    opacity: 0;
-    animation: subir 1s forwards;
-    z-index: 10;
-}
-
-@keyframes subir {
-    0% { opacity: 0; transform: translate(-50%, -50px); }
-    50% { opacity: 1; transform: translate(-50%, -30px); }
-    100% { opacity: 0; transform: translate(-50%, -60px); }
-}
-
-/* ---------------- CONTROLES CANTIDAD ---------------- */
-.cantidad-controls {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    margin-top: 5px;
-}
-
-.cantidad-controls button {
-    padding: 0.2rem 0.5rem;
-    font-size: 14px;
-}
-
-.cantidad-controls span {
-    min-width: 20px;
-    text-align: center;
-}
-
-/* ---------------- FORMULARIO CONTACTO ---------------- */
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    max-width: 400px;
-    margin: 2rem auto; /* más separado del footer */
-    padding: 0 1rem;
-}
-
-form input, form textarea, form button {
-    width: 100%;
-    padding: 0.5rem;
-    font-size: 14px;
-}
-
-form button {
-    background-color: #00FFFF;
-    color: #333;
-    font-weight: bold;
-}
-
-/* ---------------- PINES ---------------- */
-#pines .producto img {
-    width: 150px;
-    height: 150px;
-    object-fit: contain;
-    transition: transform 0.3s ease;
-}
-
-#pines .producto img:hover {
-    transform: scale(1.2);
-}
+/* ---------------- FORMULARIO ---------------- */
+form { display:flex; flex-direction:column; gap:0.5rem; max-width:400px; margin:auto; padding:0 1rem; }
+form input, form textarea, form button { width:100%; padding:0.5rem; font-size:14px; }
+form button { background-color:#00FFFF; color:#333; font-weight:bold; }
 
 /* ---------------- FOOTER ---------------- */
-footer {
-    text-align: center;
-    padding: 1rem;
-    background: linear-gradient(90deg, #FFFF00 0%, #FF00FF 50%, #00FFFF 100%);
-    color: #333;
-}
+footer { text-align:center; padding:1rem; background:linear-gradient(90deg,#FFFF00 0%,#FF00FF 50%,#00FFFF 100%); color:#333; }
 
-/* ---------------- RESPONSIVE MÓVIL ---------------- */
-@media (max-width: 768px) {
-    .header-container {
-        flex-direction: column;
-        align-items: center;
-        gap: 0.5rem;
-        text-align: center;
-    }
-
-    .header-top {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .logo { height: 40px; }
-    .header-top h1 { font-size: 20px; }
-
-    .header-nav {
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-        width: 100%;
-    }
-
-    .producto h3 { font-size: 16px; }
-    .producto p { font-size: 14px; }
-    button { font-size: 12px; padding: 0.3rem 0.5rem; }
-    .cantidad-controls button { padding: 0.2rem 0.4rem; font-size: 12px; }
+/* ---------------- RESPONSIVE ---------------- */
+@media(max-width:768px){
+    .header-container { flex-direction: column; align-items: center; gap:0.5rem; text-align:center; }
+    .header-top { flex-direction: column; align-items:center; }
+    .logo { height:40px; }
+    .header-top h1 { font-size:20px; }
+    .header-nav { justify-content:center; flex-wrap:wrap; gap:0.5rem; width:100%; }
+    .producto h3 { font-size:16px; }
+    .producto p { font-size:14px; }
+    button { font-size:12px; padding:0.3rem 0.5rem; }
 }
