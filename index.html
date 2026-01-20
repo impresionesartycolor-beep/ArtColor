@@ -5,140 +5,53 @@
   <title>ArtColor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background: #f5f5f5;
-    }
+  <link rel="icon" type="image/png" href="images/LogoArtColor.png">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 
-    header {
-      background: #6a1b9a;
-      color: white;
-      padding: 15px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .productos {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-      padding: 20px;
-    }
-
-    .producto {
-      background: white;
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,.1);
-      text-align: center;
-    }
-
-    .producto img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 10px;
-    }
-
-    button {
-      background: #6a1b9a;
-      color: white;
-      border: none;
-      padding: 8px 12px;
-      border-radius: 6px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-
-    /* MODAL */
-    #carrito-modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,.5);
-    }
-
-    .modal-content {
-      background: white;
-      width: 90%;
-      max-width: 400px;
-      margin: 80px auto;
-      padding: 20px;
-      border-radius: 10px;
-    }
-
-    .close {
-      float: right;
-      cursor: pointer;
-      font-size: 18px;
-    }
-
-    li {
-      margin-bottom: 10px;
-    }
-
-    li button {
-      margin-left: 5px;
-      padding: 3px 7px;
-    }
-  </style>
+  <!-- SUPABASE -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
+
 <body>
 
 <header>
-  <h2>ArtColor</h2>
-  <button id="carrito-btn">Carrito (0)</button>
+  <div class="header-container">
+    <div class="header-top">
+      <img src="images/LogoArtColor.png" class="logo">
+      <h1>ArtColor</h1>
+    </div>
+    <nav class="header-nav">
+      <a href="#productos">Productos</a>
+      <a href="#pines">Pines</a>
+      <button id="carrito-btn">Carrito (0)</button>
+    </nav>
+  </div>
 </header>
 
-<section class="productos">
-
-  <!-- PRODUCTO CON STOCK REAL -->
-  <div class="producto"
-    data-id="1"
-    data-supabase-id="026cddda-3539-4dd1-bacf-b37cd431c6f5"
-    data-nombre="Sticker PEPA PIG"
-    data-precio="2000">
-
-    <img src="https://i.pinimg.com/1200x/34/fa/2b/34fa2bf866ec16256eb48d13c1fe8ec2.jpg">
-    <h3>Sticker PEPA PIG</h3>
-    <p>$2000</p>
-    <button class="agregar-carrito">Agregar</button>
-  </div>
-
-  <!-- PINES (SIN STOCK) -->
-  <div class="producto"
-    data-id="2"
-    data-nombre="Pin para Crocs"
-    data-precio="1500">
-
-    <img src="https://i.pinimg.com/564x/3f/3a/89/3f3a89f17f8fdfb3f3cbb5c8ef7bbfd3.jpg">
-    <h3>Pin para Crocs</h3>
-    <p>$1500</p>
-    <button class="agregar-carrito">Agregar</button>
-  </div>
-
+<!-- SECCIÓN PRODUCTOS -->
+<section id="productos">
+  <h2>Nuestros productos</h2>
+  <div id="productos-grid" class="productos-grid"></div>
 </section>
 
-<!-- MODAL -->
-<div id="carrito-modal">
+<!-- SECCIÓN PINES PARA CROCS -->
+<section id="pines">
+  <h2>Pines para Crocs</h2>
+  <div id="pines-grid" class="productos-grid"></div>
+</section>
+
+<!-- MODAL CARRITO -->
+<section id="carrito-modal" class="modal">
   <div class="modal-content">
     <span class="close">&times;</span>
-    <h3>Carrito</h3>
+    <h2>Tu carrito</h2>
     <ul id="carrito-lista"></ul>
-    <p>Total: $<span id="total">0</span></p>
-    <button id="whatsapp">Comprar por WhatsApp</button>
+    <p><b>Total: $<span id="total">0</span></b></p>
+    <button id="whatsapp">Finalizar por WhatsApp</button>
   </div>
-</div>
+</section>
 
-<!-- SUPABASE -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="script.js"></script>
-
 </body>
 </html>
