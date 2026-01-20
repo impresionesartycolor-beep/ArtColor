@@ -1,97 +1,144 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <link rel="icon" type="image/png" href="images/LogoArtColor.png">
+  <meta charset="UTF-8">
+  <title>ArtColor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ArtColor - Tienda de Arte Personalizado</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f5f5f5;
+    }
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    header {
+      background: #6a1b9a;
+      color: white;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-    <link rel="stylesheet" href="styles.css">
+    .productos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .producto {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.1);
+      text-align: center;
+    }
+
+    .producto img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    button {
+      background: #6a1b9a;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    /* MODAL */
+    #carrito-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,.5);
+    }
+
+    .modal-content {
+      background: white;
+      width: 90%;
+      max-width: 400px;
+      margin: 80px auto;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .close {
+      float: right;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+
+    li button {
+      margin-left: 5px;
+      padding: 3px 7px;
+    }
+  </style>
 </head>
 <body>
 
 <header>
-    <div class="header-container">
-        <div class="header-top">
-            <img src="images/LogoArtColor.png" alt="ArtColor Logo" class="logo">
-            <h1>ArtColor</h1>
-        </div>
-        <nav class="header-nav">
-            <a href="#productos" class="scroll-link">Productos</a>
-            <a href="#pines" class="scroll-link">Pines</a>
-            <a href="#contacto" class="scroll-link">Contacto</a>
-            <button id="carrito-btn">Carrito (0)</button>
-        </nav>
-    </div>
+  <h2>ArtColor</h2>
+  <button id="carrito-btn">Carrito (0)</button>
 </header>
 
-<section id="productos">
-    <h2>Nuestros Productos</h2>
-    <div class="productos-grid">
-        <div class="producto" data-id="1" data-nombre="Sticker Personalizado" data-precio="4000">
-            <img src="images/stickers.png" alt="sticker">
-            <h3>Sticker Personalizado x 15 Unidades de 5x5cm</h3>
-            <p>$4000</p>
-            <button class="agregar-carrito">Agregar</button>
-            <span class="cantidad-agregada">0</span>
-        </div>
+<section class="productos">
 
-        <div class="producto" data-id="2" data-nombre="Foto Impresa" data-precio="8000">
-            <img src="images/Polaroid1.jpeg" alt="Foto Impresa">
-            <h3>Fotos Polaroid x12</h3>
-            <p>$8000</p>
-            <button class="agregar-carrito">Agregar</button>
-            <span class="cantidad-agregada">0</span>
-        </div>
+  <!-- PRODUCTO CON STOCK REAL -->
+  <div class="producto"
+    data-id="1"
+    data-supabase-id="026cddda-3539-4dd1-bacf-b37cd431c6f5"
+    data-nombre="Sticker PEPA PIG"
+    data-precio="2000">
 
-        <div class="producto" data-id="3" data-nombre="Tatuaje Temporal" data-precio="6500">
-            <img src="images/TatuajesTemporales.jpg" alt="Tatuaje Temporal">
-            <h3>Tatuaje Temporal x20 Unidades</h3>
-            <p>$6500</p>
-            <button class="agregar-carrito">Agregar</button>
-            <span class="cantidad-agregada">0</span>
-        </div>
-    </div>
+    <img src="https://i.pinimg.com/1200x/34/fa/2b/34fa2bf866ec16256eb48d13c1fe8ec2.jpg">
+    <h3>Sticker PEPA PIG</h3>
+    <p>$2000</p>
+    <button class="agregar-carrito">Agregar</button>
+  </div>
+
+  <!-- PINES (SIN STOCK) -->
+  <div class="producto"
+    data-id="2"
+    data-nombre="Pin para Crocs"
+    data-precio="1500">
+
+    <img src="https://i.pinimg.com/564x/3f/3a/89/3f3a89f17f8fdfb3f3cbb5c8ef7bbfd3.jpg">
+    <h3>Pin para Crocs</h3>
+    <p>$1500</p>
+    <button class="agregar-carrito">Agregar</button>
+  </div>
+
 </section>
 
-<section id="pines">
-    <h2>Pines para crocs</h2>
-    <p class="promo">50% de descuento en la segunda unidad</p>
-    <div id="pines-grid" class="productos-grid">
-        <!-- Pines se cargan dinámicamente -->
-    </div>
-</section>
+<!-- MODAL -->
+<div id="carrito-modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h3>Carrito</h3>
+    <ul id="carrito-lista"></ul>
+    <p>Total: $<span id="total">0</span></p>
+    <button id="whatsapp">Comprar por WhatsApp</button>
+  </div>
+</div>
 
-<!-- MODAL CARRITO -->
-<section id="carrito-modal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>Tu carrito</h2>
-        <ul id="carrito-lista"></ul>
-        <p>Total: $<span id="total">0</span></p>
-        <button id="whatsapp">Finalizar por WhatsApp</button>
-    </div>
-</section>
-
-<section id="contacto">
-    <h2>Contacto</h2>
-    <form>
-        <input type="text" placeholder="Nombre" required>
-        <input type="email" placeholder="Email" required>
-        <textarea placeholder="Mensaje"></textarea>
-        <button type="submit">Enviar</button>
-    </form>
-</section>
-
-<footer>
-    <p>&copy; 2026 ArtColor</p>
-</footer>
-
+<!-- SUPABASE -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="script.js"></script>
+
 </body>
 </html>
