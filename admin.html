@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>ArtColor · Dashboard</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+body{
+  font-family: Arial, sans-serif;
+  background:#f4f4f4;
+  margin:0;
+  padding:20px;
+}
+h1{color:#7b2cbf}
+.card{
+  background:#fff;
+  padding:15px;
+  margin-bottom:10px;
+  border-radius:10px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+button{
+  padding:8px 14px;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+}
+.add{background:#4caf50;color:#fff}
+.sub{background:#f44336;color:#fff}
+#login{
+  max-width:320px;
+  margin:80px auto;
+  background:#fff;
+  padding:25px;
+  border-radius:12px;
+}
+input{
+  width:100%;
+  padding:10px;
+  margin-bottom:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div id="login">
+  <h2>Login ArtColor</h2>
+  <input id="email" type="email" placeholder="Email">
+  <input id="password" type="password" placeholder="Contraseña">
+  <button id="loginBtn">Ingresar</button>
+</div>
+
+<div id="dashboard" style="display:none">
+  <h1>📊 Dashboard ArtColor</h1>
+  <button id="logoutBtn">Cerrar sesión</button>
+  <div id="products"></div>
+</div>
+
+<script>
+/* =====================
+   SUPABASE CONFIG
+===================== */
+const SUPABASE_URL = "https://icrhvmpswlkfaaxjitbp.supabase.co";
+const SUPABASE_KEY = "sb_publishable_2oE1XB196YWbuNPAE-39Tg_h0cNO_0a";
+
+const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+/* =====================
+   LOGIN
+===================== */
+async function handleLogin(){
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
+
+  const { error } = await client.auth.signInWithPassword({
+    email,
+    password
+  });
+
+  if(error){
+    alert(error.message);
+    console.error(error);
+    return;
+  }
+
+  showDashboard();
+}
+
+/* =====================
+   LOGOUT
+===================== */
+async function handleLogout(){
+  await client.auth.signOut();
+  location.reload();
+}
+
+/* =====================
+   DASHBOARD
+===================== */
+async function showDashboard(){
+  document.getElementById("login").style.display = "none";
+  document.getElementById("dashboard").style.display = "block";
+  loadProducts();
+}
+
+async function loadProducts(){
+  const { data, error } = await client
+    .from("products")
+    .select("*")
+    .order("name");
+
+  if(error){
+    console.error(error);
+    return;
+  }
+
+  const cont = document.getElementById("products");
+  cont.innerHTML = "";
+
+  data.forEach(p=>{
+    cont.innerHTML += `
+      <div class="card">
+        <div>
+          <b>${p.name}</b><br>
+          💲${p.price}<br>
+          📦 Stock: ${p.stock}
+        </div>
+        <div>
+          <button class="add" onclick="updateStock('${p.id}', ${p.stock + 1})">+</button>
+          <button class="sub" onclick="updateStock('${p.id}', ${p.stock - 1})">-</button>
+        </div>
+      </div>
+    `;
+  });
+}
+
+async function updateStock(id, stock){
+  if(stock < 0) return;
+
+  await client
+    .from("products")
+    .update({ stock })
+    .eq("id", id);
+
+  loadProducts();
+}
+
+/* =====================
+   EVENTOS
+===================== */
+document.getElementById("loginBtn").addEventListener("click", handleLogin);
+document.getElementById("logoutBtn").addEventListener("click", handleLogout);
+
+/* =====================
+   SESIÓN ACTIVA
+===================== */
+client.auth.getSession().then(({ data })=>{
+  if(data.session){
+    showDashboard();
+  }
+});
+</script>
+
+</body>
+</html>
